@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
 import logoIcon from "../assets/logo-icon.png";
+import { useLanguage } from "../context/LanguageContext";
 import "./Header.css";
 
-const LINKS = [
-  { href: "#como-funciona", label: "Cómo funciona" },
-  { href: "#placas", label: "Placas" },
-  { href: "#muestra", label: "Perfil digital" },
-  { href: "#contacto", label: "Contacto" },
-];
-
 export default function Header() {
+  const { lang, setLang, t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -21,6 +16,14 @@ export default function Header() {
   }, []);
 
   const closeMenu = () => setOpen(false);
+
+  const LINKS = [
+    { href: "#nosotros", label: t.nav.about },
+    { href: "#como-funciona", label: t.nav.how },
+    { href: "#placas", label: t.nav.plaques },
+    { href: "#muestra", label: t.nav.profile },
+    { href: "#contacto", label: t.nav.contact },
+  ];
 
   return (
     <header className={`header ${scrolled ? "header--scrolled" : ""}`}>
@@ -40,8 +43,24 @@ export default function Header() {
               </li>
             ))}
           </ul>
+
+          <div className="header__lang" role="group" aria-label="Idioma / Language">
+            <button
+              className={lang === "es" ? "header__lang-btn header__lang-btn--active" : "header__lang-btn"}
+              onClick={() => setLang("es")}
+            >
+              ES
+            </button>
+            <button
+              className={lang === "en" ? "header__lang-btn header__lang-btn--active" : "header__lang-btn"}
+              onClick={() => setLang("en")}
+            >
+              EN
+            </button>
+          </div>
+
           <a href="#contacto" className="btn btn-gold header__cta" onClick={closeMenu}>
-            Crear un Memorial
+            {t.nav.cta}
           </a>
         </nav>
 

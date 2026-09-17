@@ -1,7 +1,11 @@
 import logoIcon from "../assets/logo-icon.png";
+import { useLanguage } from "../context/LanguageContext";
 import "./Footer.css";
 
 export default function Footer() {
+  const { t } = useLanguage();
+  const f = t.footer;
+
   return (
     <footer className="footer">
       <div className="container footer__inner">
@@ -10,7 +14,7 @@ export default function Footer() {
           <span>Recuerdos Eternos</span>
         </div>
 
-        <p className="footer__tag">Memorias Digitales Perpetuas</p>
+        <p className="footer__tag">{f.tag}</p>
 
         <a
           className="footer__whatsapp"
@@ -25,10 +29,11 @@ export default function Footer() {
         </a>
 
         <nav className="footer__links">
-          <a href="#como-funciona">Cómo funciona</a>
-          <a href="#placas">Placas</a>
-          <a href="#muestra">Perfil digital</a>
-          <a href="#contacto">Contacto</a>
+          <a href="#nosotros">{f.links.about}</a>
+          <a href="#como-funciona">{f.links.how}</a>
+          <a href="#placas">{f.links.plaques}</a>
+          <a href="#muestra">{f.links.profile}</a>
+          <a href="#contacto">{f.links.contact}</a>
         </nav>
 
         <p className="footer__copy">

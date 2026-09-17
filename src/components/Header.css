@@ -107,6 +107,30 @@
   color: var(--color-oxford);
 }
 
+.header__lang {
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.header__lang-btn {
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-text-soft);
+  letter-spacing: 0.04em;
+}
+
+.header__lang-btn--active {
+  background: var(--color-oxford);
+  color: var(--color-gold-soft);
+}
+
 @media (min-width: 900px) {
   .header__toggle {
     display: none;
