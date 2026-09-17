@@ -44,6 +44,16 @@
   background: rgba(198, 166, 100, 0.08);
 }
 
+.preview__privacy-note {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+}
+
+.preview__privacy-note strong {
+  color: var(--color-oxford);
+}
+
 .preview__phone-wrap {
   display: flex;
   justify-content: center;
@@ -109,7 +119,64 @@
   font-style: italic;
   font-size: 0.8rem;
   color: var(--color-text-soft);
-  margin-bottom: 16px;
+  margin-bottom: 4px;
+}
+
+.phone__quechua {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.7rem;
+  color: var(--color-gold-dark);
+  padding: 0 20px;
+  margin-bottom: 14px;
+}
+
+.phone__privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto 14px;
+  background: none;
+  border: none;
+  font-size: 0.72rem;
+  color: var(--color-text-soft);
+  font-weight: 500;
+}
+
+.phone__privacy-track {
+  position: relative;
+  width: 34px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--color-border);
+  transition: background 0.25s ease;
+  flex-shrink: 0;
+}
+
+.phone__privacy-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease;
+}
+
+.phone__privacy--private .phone__privacy-track {
+  background: var(--color-oxford);
+}
+
+.phone__privacy--private .phone__privacy-knob {
+  transform: translateX(16px);
+}
+
+.phone__privacy--private {
+  color: var(--color-oxford);
 }
 
 .phone__nav {
@@ -141,9 +208,35 @@
   color: var(--color-gold-soft);
 }
 
+.phone__nav-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
 .phone__body {
   padding: 0 18px;
   flex: 1;
+}
+
+.phone-private {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  padding: 30px 10px;
+  color: var(--color-text-soft);
+}
+
+.phone-private svg {
+  width: 40px;
+  height: 40px;
+  color: var(--color-gold-dark);
+}
+
+.phone-private p {
+  font-size: 0.82rem;
+  line-height: 1.6;
 }
 
 .phone-content p {
@@ -163,6 +256,14 @@
   aspect-ratio: 1;
   border-radius: 8px;
   background: linear-gradient(160deg, #e9e2d0, #cbb98d);
+  display: grid;
+  place-items: center;
+  color: rgba(74, 60, 31, 0.45);
+}
+
+.phone-grid__item svg {
+  width: 26%;
+  height: 26%;
 }
 
 .phone-tree {

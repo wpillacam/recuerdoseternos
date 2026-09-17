@@ -68,6 +68,15 @@
   aspect-ratio: 1 / 1;
 }
 
+.plaque-mock__metal--sticker {
+  width: min(180px, 70%);
+  aspect-ratio: 1 / 1;
+  background: linear-gradient(160deg, #fdfcf7, #eee7d3);
+  border: 2px dashed rgba(138, 106, 47, 0.55);
+  box-shadow: 0 14px 30px -16px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
 .plaque-mock__qr {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -168,5 +177,11 @@
 @media (min-width: 760px) {
   .catalog__grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .catalog__grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }

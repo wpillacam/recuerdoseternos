@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Reveal from "./Reveal";
 import "./HowItWorks.css";
 
 const STEPS = [
@@ -55,14 +56,14 @@ export default function HowItWorks() {
   return (
     <section id="como-funciona" className="section how">
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <p className="eyebrow">Proceso simple</p>
           <h2 className="section-title">¿Cómo funciona?</h2>
           <p className="section-sub">Tres pasos para crear un homenaje que trasciende el tiempo.</p>
-        </div>
+        </Reveal>
 
         <div className="how__grid">
-          <div className="how__steps">
+          <Reveal className="how__steps">
             {STEPS.map((step) => (
               <button
                 key={step.id}
@@ -79,9 +80,9 @@ export default function HowItWorks() {
                 </span>
               </button>
             ))}
-          </div>
+          </Reveal>
 
-          <div className="how__display">
+          <Reveal className="how__display" delay={120}>
             <div className="how__icon">{current.icon}</div>
             <h3 className="how__display-title">{current.title}</h3>
             <p className="how__display-detail">{current.detail}</p>
@@ -93,7 +94,7 @@ export default function HowItWorks() {
                 />
               ))}
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

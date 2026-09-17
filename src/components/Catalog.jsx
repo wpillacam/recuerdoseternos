@@ -1,3 +1,4 @@
+import Reveal from "./Reveal";
 import "./Catalog.css";
 
 const PLAQUES = [
@@ -7,6 +8,7 @@ const PLAQUES = [
     size: "12 x 8 cm",
     tag: "Personalizada",
     shape: "rect",
+    cta: "Elegir esta placa",
     features: [
       "Aluminio anodizado con grabado láser",
       "Diseño y texto 100% personalizados",
@@ -21,11 +23,27 @@ const PLAQUES = [
     size: "5 x 5 cm",
     tag: "Genérica",
     shape: "square",
+    cta: "Elegir esta placa",
     features: [
       "Aluminio grabado con acabado mate",
       "Formato compacto y discreto",
       "Incluye código QR grabado",
       "Ideal para nichos y espacios reducidos",
+    ],
+    featured: false,
+  },
+  {
+    id: "sticker",
+    name: "Adhesivo QR",
+    size: "8 x 8 cm",
+    tag: "Adhesivo",
+    shape: "sticker",
+    cta: "Elegir este adhesivo",
+    features: [
+      "Vinilo resistente a la intemperie y rayos UV",
+      "No requiere reemplazar la lápida actual",
+      "Incluye código QR de alta duración",
+      "Instalación sencilla en minutos",
     ],
     featured: false,
   },
@@ -35,19 +53,21 @@ export default function Catalog() {
   return (
     <section id="placas" className="section catalog">
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <p className="eyebrow">Catálogo</p>
-          <h2 className="section-title">Placas metálicas conmemorativas</h2>
+          <h2 className="section-title">Placas y adhesivos conmemorativos</h2>
           <p className="section-sub">
-            Grabado láser de alta precisión sobre aluminio, preparado para acompañar la lápida
-            por generaciones.
+            Grabado láser de alta precisión sobre aluminio, o un adhesivo QR si ya tienes una
+            lápida y no quieres reemplazarla.
           </p>
-        </div>
+        </Reveal>
 
         <div className="catalog__grid">
-          {PLAQUES.map((plaque) => (
-            <article
+          {PLAQUES.map((plaque, i) => (
+            <Reveal
               key={plaque.id}
+              as="article"
+              delay={i * 90}
               className={`plaque-card ${plaque.featured ? "plaque-card--featured" : ""}`}
             >
               {plaque.featured && <span className="plaque-card__badge">Más elegida</span>}
@@ -94,11 +114,11 @@ export default function Catalog() {
                     href="#contacto"
                     className={`btn btn-block ${plaque.featured ? "btn-gold" : "btn-outline"}`}
                   >
-                    Elegir esta placa
+                    {plaque.cta}
                   </a>
                 </div>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </div>

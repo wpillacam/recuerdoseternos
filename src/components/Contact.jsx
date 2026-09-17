@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Reveal from "./Reveal";
 import "./Contact.css";
 
 const WHATSAPP_NUMBER = "51914772762";
@@ -22,17 +23,17 @@ export default function Contact() {
   return (
     <section id="contacto" className="section contact">
       <div className="container">
-        <div className="section-head">
+        <Reveal className="section-head">
           <p className="eyebrow">Estamos para ti</p>
           <h2 className="section-title">Conversemos sobre su memorial</h2>
           <p className="section-sub">
             Atención personalizada en Ayacucho y a nivel nacional. Cuéntanos y te acompañamos en
             cada paso.
           </p>
-        </div>
+        </Reveal>
 
         <div className="contact__grid">
-          <form className="contact__form" onSubmit={handleSubmit}>
+          <Reveal as="form" className="contact__form" onSubmit={handleSubmit}>
             {sent ? (
               <div className="contact__success">
                 <p>Gracias por escribirnos.</p>
@@ -80,9 +81,9 @@ export default function Contact() {
                 </button>
               </>
             )}
-          </form>
+          </Reveal>
 
-          <div className="contact__side">
+          <Reveal className="contact__side" delay={120}>
             <div className="contact__card">
               <h3>Atención directa por WhatsApp</h3>
               <p>
@@ -111,7 +112,7 @@ export default function Contact() {
                 <li>Soporte para carga de contenido digital</li>
               </ul>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

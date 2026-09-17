@@ -7,7 +7,7 @@
   --color-deep-blue-soft: #16233d;
   --color-gold: #c6a664;
   --color-gold-soft: #d9c294;
-  --color-gold-dark: #a3813f;
+  --color-gold-dark: #8a6a2f;
   --color-text: #262521;
   --color-text-soft: #5c5a54;
   --color-border: #e6e0d4;
@@ -198,5 +198,35 @@ ul {
 @media (min-width: 768px) {
   .section {
     padding: 108px 0;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }

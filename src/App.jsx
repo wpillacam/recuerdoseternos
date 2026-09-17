@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import HowItWorks from "./components/HowItWorks";
+import Differentiators from "./components/Differentiators";
 import Catalog from "./components/Catalog";
 import PhonePreview from "./components/PhonePreview";
 import Contact from "./components/Contact";
@@ -15,6 +16,7 @@ function App() {
       <main>
         <Hero />
         <HowItWorks />
+        <Differentiators />
         <Catalog />
         <PhonePreview />
         <Contact />

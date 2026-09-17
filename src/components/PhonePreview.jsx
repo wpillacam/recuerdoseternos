@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Reveal from "./Reveal";
 import "./PhonePreview.css";
 
 function DigitalCandleDemo() {
@@ -31,6 +32,20 @@ function DigitalCandleDemo() {
   );
 }
 
+const PHOTO_ICON = (
+  <svg viewBox="0 0 24 24" fill="none">
+    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" strokeWidth="1.4" />
+    <circle cx="8.5" cy="10" r="1.6" stroke="currentColor" strokeWidth="1.4" />
+    <path
+      d="m4 17 5-4.5 3 2.5 4-4.5 4 4"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const TABS = [
   {
     id: "bio",
@@ -59,7 +74,9 @@ const TABS = [
     content: (
       <div className="phone-grid">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div className="phone-grid__item" key={i} />
+          <div className="phone-grid__item" key={i}>
+            {PHOTO_ICON}
+          </div>
         ))}
       </div>
     ),
@@ -98,11 +115,12 @@ const TABS = [
 
 export default function PhonePreview() {
   const [tab, setTab] = useState("bio");
+  const [isPrivate, setIsPrivate] = useState(false);
 
   return (
     <section id="muestra" className="section preview">
       <div className="container preview__inner">
-        <div className="preview__text">
+        <Reveal className="preview__text">
           <p className="eyebrow">Muestra interactiva</p>
           <h2 className="section-title">Así luce un memorial digital</h2>
           <p className="section-sub preview__desc">
@@ -122,9 +140,14 @@ export default function PhonePreview() {
               </button>
             ))}
           </div>
-        </div>
 
-        <div className="preview__phone-wrap">
+          <p className="preview__privacy-note">
+            Tú decides quién puede verlo: prueba a marcar el memorial como{" "}
+            <strong>privado</strong> en el ejemplo.
+          </p>
+        </Reveal>
+
+        <Reveal className="preview__phone-wrap" delay={120}>
           <div className="phone">
             <div className="phone__notch" />
             <div className="phone__screen">
@@ -132,6 +155,21 @@ export default function PhonePreview() {
               <div className="phone__avatar" />
               <p className="phone__name">María Elena Quispe</p>
               <p className="phone__dates">15 mar 1948 — 02 ene 2024</p>
+              <p className="phone__quechua">
+                “Kawsayninpi wiñaypaq” · vive para siempre en nuestra memoria
+              </p>
+
+              <button
+                type="button"
+                className={`phone__privacy ${isPrivate ? "phone__privacy--private" : ""}`}
+                onClick={() => setIsPrivate((v) => !v)}
+                aria-pressed={isPrivate}
+              >
+                <span className="phone__privacy-track">
+                  <span className="phone__privacy-knob" />
+                </span>
+                {isPrivate ? "Memorial privado" : "Memorial público"}
+              </button>
 
               <div className="phone__nav">
                 {TABS.map((t) => (
@@ -139,16 +177,45 @@ export default function PhonePreview() {
                     key={t.id}
                     className={`phone__nav-btn ${tab === t.id ? "phone__nav-btn--active" : ""}`}
                     onClick={() => setTab(t.id)}
+                    disabled={isPrivate}
                   >
                     {t.label}
                   </button>
                 ))}
               </div>
 
-              <div className="phone__body">{TABS.find((t) => t.id === tab).content}</div>
+              <div className="phone__body">
+                {isPrivate ? (
+                  <div className="phone-private">
+                    <svg viewBox="0 0 48 48" fill="none">
+                      <rect
+                        x="12"
+                        y="22"
+                        width="24"
+                        height="18"
+                        rx="3"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      />
+                      <path
+                        d="M16 22v-6a8 8 0 0 1 16 0v6"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      />
+                    </svg>
+                    <p>
+                      Este memorial es privado.
+                      <br />
+                      Solo familiares con el enlace pueden verlo.
+                    </p>
+                  </div>
+                ) : (
+                  TABS.find((t) => t.id === tab).content
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
