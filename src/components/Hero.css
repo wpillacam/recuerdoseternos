@@ -1,0 +1,123 @@
+.hero {
+  position: relative;
+  padding: 160px 0 80px;
+  background: linear-gradient(180deg, #fdfcfa 0%, var(--color-bone) 55%, #f4efe4 100%);
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero__glow {
+  position: absolute;
+  top: -220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 620px;
+  background: radial-gradient(closest-side, rgba(198, 166, 100, 0.22), rgba(198, 166, 100, 0));
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero__eyebrow {
+  color: var(--color-deep-blue);
+}
+
+.hero__brand {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 10vw, 5.4rem);
+  line-height: 1.05;
+  background: linear-gradient(135deg, #e7cf9c 0%, var(--color-gold) 45%, var(--color-gold-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 0.015em;
+  margin-bottom: 18px;
+  text-shadow: 0 2px 40px rgba(163, 129, 63, 0.15);
+}
+
+.hero__slogan {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 3vw, 1.55rem);
+  color: var(--color-oxford);
+  margin-bottom: 26px;
+  letter-spacing: 0.02em;
+}
+
+.hero__desc {
+  max-width: 620px;
+  color: var(--color-text-soft);
+  font-size: 1.02rem;
+  margin-bottom: 38px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 340px;
+  margin-bottom: 56px;
+}
+
+.hero__actions .btn {
+  width: 100%;
+}
+
+.hero__trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+}
+
+.hero__trust div:not(.hero__trust-divider) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.hero__trust strong {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--color-oxford);
+}
+
+.hero__trust span {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-soft);
+}
+
+.hero__trust-divider {
+  width: 1px;
+  height: 34px;
+  background: var(--color-border);
+}
+
+@media (min-width: 620px) {
+  .hero__actions {
+    flex-direction: row;
+    max-width: none;
+    justify-content: center;
+  }
+
+  .hero__actions .btn {
+    width: auto;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    padding: 200px 0 110px;
+  }
+}
