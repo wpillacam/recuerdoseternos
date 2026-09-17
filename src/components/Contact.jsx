@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Contact.css";
 
-const WHATSAPP_NUMBER = "51987654321";
+const WHATSAPP_NUMBER = "51914772762";
 const WHATSAPP_MESSAGE = encodeURIComponent(
   "Hola, quisiera información sobre las placas y memoriales digitales de Recuerdos Eternos."
 );
