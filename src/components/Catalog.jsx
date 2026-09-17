@@ -7,7 +7,6 @@ const PLAQUES = [
     size: "12 x 8 cm",
     tag: "Personalizada",
     shape: "rect",
-    price: "S/ 189",
     features: [
       "Aluminio anodizado con grabado láser",
       "Diseño y texto 100% personalizados",
@@ -22,7 +21,6 @@ const PLAQUES = [
     size: "5 x 5 cm",
     tag: "Genérica",
     shape: "square",
-    price: "S/ 99",
     features: [
       "Aluminio grabado con acabado mate",
       "Formato compacto y discreto",
@@ -92,13 +90,9 @@ export default function Catalog() {
                 </ul>
 
                 <div className="plaque-card__footer">
-                  <span className="plaque-card__price">
-                    {plaque.price}
-                    <small>&nbsp;/ unidad</small>
-                  </span>
                   <a
                     href="#contacto"
-                    className={`btn ${plaque.featured ? "btn-gold" : "btn-outline"}`}
+                    className={`btn btn-block ${plaque.featured ? "btn-gold" : "btn-outline"}`}
                   >
                     Elegir esta placa
                   </a>

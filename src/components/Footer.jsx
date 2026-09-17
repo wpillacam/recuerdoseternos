@@ -32,7 +32,11 @@ export default function Footer() {
         </nav>
 
         <p className="footer__copy">
-          © {new Date().getFullYear()} Recuerdos Eternos · recuerdoseternos.pe · Ayacucho, Perú
+          © {new Date().getFullYear()} Recuerdos Eternos ·{" "}
+          <a href="https://www.yuyarisqayki.com" target="_blank" rel="noreferrer">
+            www.yuyarisqayki.com
+          </a>{" "}
+          · Ayacucho, Perú
         </p>
       </div>
     </footer>

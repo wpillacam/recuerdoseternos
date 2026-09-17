@@ -161,25 +161,8 @@
 
 .plaque-card__footer {
   margin-top: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
   padding-top: 18px;
   border-top: 1px solid var(--color-border);
-}
-
-.plaque-card__price {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  color: var(--color-oxford);
-}
-
-.plaque-card__price small {
-  font-family: var(--font-sans);
-  font-size: 0.7rem;
-  color: var(--color-text-soft);
 }
 
 @media (min-width: 760px) {
