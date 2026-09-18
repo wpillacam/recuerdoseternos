@@ -1,0 +1,459 @@
+.memorial-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, var(--color-white), var(--color-bone) 220px);
+  padding-bottom: 60px;
+}
+
+.memorial-page__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+}
+
+.memorial-page__brand img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.memorial-page__bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.memorial-page__lang {
+  display: flex;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.memorial-page__lang-btn {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--color-text-soft);
+}
+
+.memorial-page__lang-btn--active {
+  background: var(--color-oxford);
+  color: var(--color-gold-soft);
+}
+
+.memorial-page__share {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.78rem;
+  color: var(--color-oxford);
+}
+
+.memorial-page__toast {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-gold-soft);
+  color: var(--color-oxford);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  z-index: 20;
+}
+
+.memorial-page__cover {
+  height: 140px;
+  background: linear-gradient(135deg, var(--color-deep-blue), var(--color-oxford));
+}
+
+.memorial-page__avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--tpl-accent, var(--color-gold-soft)), var(--color-gold-dark));
+  border: 5px solid var(--color-white);
+  margin: -48px auto 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.memorial-page__name {
+  text-align: center;
+  font-size: 1.6rem;
+  padding: 0 20px;
+}
+
+.memorial-page__occupation {
+  text-align: center;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tpl-accent, var(--color-gold-dark));
+  margin-top: 6px;
+}
+
+.memorial-page__dates {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-text-soft);
+  margin-top: 6px;
+}
+
+.memorial-page__quote {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-text);
+  margin-top: 12px;
+  padding: 0 30px;
+}
+
+.memorial-page__quechua {
+  text-align: center;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--tpl-accent, var(--color-gold-dark));
+  margin-top: 10px;
+  padding: 0 24px;
+}
+
+.memorial-page__visits {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--color-text-soft);
+  margin-top: 12px;
+}
+
+.memorial-page__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 26px auto 0;
+  padding: 0 20px;
+  max-width: 720px;
+}
+
+.memorial-page__tab {
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: var(--color-text-soft);
+}
+
+.memorial-page__tab--active {
+  background: var(--color-oxford);
+  border-color: var(--color-oxford);
+  color: var(--color-gold-soft);
+}
+
+.memorial-page__body {
+  max-width: 640px;
+  margin: 30px auto 0;
+  padding: 0 20px;
+}
+
+.mem-empty {
+  text-align: center;
+  color: var(--color-text-soft);
+  font-family: var(--font-serif);
+  font-style: italic;
+  padding: 30px 0;
+}
+
+.mem-content p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  white-space: pre-wrap;
+}
+
+.mem-listen {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  color: var(--color-oxford);
+  margin-bottom: 18px;
+}
+
+.mem-listen--active {
+  background: var(--color-oxford);
+  color: var(--color-gold-soft);
+}
+
+.mem-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-left: 24px;
+}
+
+.mem-timeline::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--tpl-accent, var(--color-gold-soft));
+  opacity: 0.5;
+}
+
+.mem-timeline__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mem-timeline__item::before {
+  content: "";
+  position: absolute;
+  left: -24px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tpl-accent, var(--color-gold-dark));
+}
+
+.mem-timeline__year {
+  font-family: var(--font-display);
+  color: var(--tpl-accent, var(--color-gold-dark));
+}
+
+.mem-timeline__text {
+  color: var(--color-text-soft);
+}
+
+.mem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.mem-grid__item {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.mem-grid__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mem-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.mem-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.mem-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.mem-tree__node {
+  background: var(--color-white);
+  border: 1px solid var(--tpl-accent, var(--color-gold-soft));
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  color: var(--color-oxford);
+}
+
+.mem-tree__node small {
+  color: var(--color-text-soft);
+}
+
+.mem-tree__node--main {
+  background: var(--color-oxford);
+  color: var(--color-gold-soft);
+  border-color: var(--color-oxford);
+  font-family: var(--font-display);
+}
+
+.mem-tree__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.mem-condolences {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.mem-condolence-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+}
+
+.mem-condolence-form input,
+.mem-condolence-form textarea {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 13px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  background: var(--color-bone);
+}
+
+.mem-saved {
+  color: #2c7a4b;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.mem-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mem-note {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  border: 1px solid var(--color-border);
+}
+
+.mem-note strong {
+  color: var(--color-oxford);
+}
+
+.mem-note p {
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-text-soft);
+}
+
+.mem-candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0 10px;
+}
+
+.mem-candle__flame-wrap {
+  position: relative;
+  width: 70px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.mem-candle__body {
+  width: 40px;
+  height: 108px;
+  border-radius: 6px 6px 4px 4px;
+  background: linear-gradient(180deg, #fff8e6, #f3e2b4 55%, #e8d29a);
+  box-shadow: inset -4px 0 8px rgba(163, 129, 63, 0.25), 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.mem-candle__wick {
+  position: absolute;
+  bottom: 108px;
+  width: 3px;
+  height: 12px;
+  background: #4a3c1f;
+}
+
+.mem-candle__flame {
+  position: absolute;
+  bottom: 116px;
+  width: 20px;
+  height: 32px;
+  border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+  background: radial-gradient(circle at 50% 70%, #fff6d6 0%, var(--color-gold-soft) 35%, #f0a63b 70%, #d9701f 100%);
+  animation: mem-flicker 1.6s ease-in-out infinite;
+}
+
+.mem-candle__glow {
+  position: absolute;
+  bottom: 94px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240, 190, 90, 0.55) 0%, rgba(240, 190, 90, 0) 70%);
+  animation: mem-glow 1.6s ease-in-out infinite;
+}
+
+@keyframes mem-flicker {
+  0%, 100% { transform: scaleY(1) rotate(-1deg); }
+  25% { transform: scaleY(1.05) rotate(1.5deg); }
+  50% { transform: scaleY(0.96) rotate(-1.5deg); }
+  75% { transform: scaleY(1.03) rotate(1deg); }
+}
+
+@keyframes mem-glow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.mem-candle__btn {
+  background: linear-gradient(135deg, var(--tpl-accent, var(--color-gold-soft)), var(--color-gold-dark));
+  color: #2a1e08;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.mem-candle__btn:disabled {
+  opacity: 0.6;
+}
+
+.mem-candle__count {
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+}
+
+.mem-candle__count strong {
+  font-family: var(--font-display);
+  color: var(--color-oxford);
+  font-size: 1rem;
+}

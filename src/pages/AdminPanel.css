@@ -1,0 +1,99 @@
+.admin-form__subhead {
+  font-size: 0.95rem;
+  color: var(--color-gold-dark);
+  margin: 8px 0 -4px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border);
+}
+
+.admin-form__subhead:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.admin-template-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-template-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-direction: row !important;
+  background: var(--color-bone);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 9px 16px;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.admin-template-option input {
+  width: auto;
+  padding: 0;
+}
+
+.admin-template-option--active {
+  border-color: var(--color-gold);
+  background: rgba(198, 166, 100, 0.12);
+  color: var(--color-oxford);
+  font-weight: 500;
+}
+
+.admin-color-picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+.admin-color-picker label {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px !important;
+}
+
+.admin-color-picker input[type="color"] {
+  width: 44px;
+  height: 34px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 2px;
+  background: var(--color-white);
+}
+
+.admin-color-swatches {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-swatch {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.admin-swatch--active {
+  border-color: var(--color-oxford);
+}
+
+.admin-custom-html {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--color-bone);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.admin-custom-html textarea {
+  font-family: monospace;
+  font-size: 0.78rem;
+}

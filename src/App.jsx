@@ -1,31 +1,42 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { LanguageProvider } from "./context/LanguageContext";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import HowItWorks from "./components/HowItWorks";
-import Differentiators from "./components/Differentiators";
-import Catalog from "./components/Catalog";
-import PhonePreview from "./components/PhonePreview";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import WhatsappFloat from "./components/WhatsappFloat";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+import LandingPage from "./pages/LandingPage";
+import LoginPage from "./pages/LoginPage";
+import ClientPanel from "./pages/ClientPanel";
+import AdminPanel from "./pages/AdminPanel";
+import MemorialPage from "./pages/MemorialPage";
 
 function App() {
   return (
     <LanguageProvider>
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <HowItWorks />
-        <Differentiators />
-        <Catalog />
-        <PhonePreview />
-        <Contact />
-      </main>
-      <Footer />
-      <WhatsappFloat />
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/panel"
+              element={
+                <ProtectedRoute>
+                  <ClientPanel />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminPanel />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/:uuid" element={<MemorialPage />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
       <Analytics />
     </LanguageProvider>
   );

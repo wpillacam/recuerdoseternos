@@ -1,0 +1,213 @@
+.templates {
+  background: var(--color-white);
+}
+
+.templates__grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 1fr;
+}
+
+.template-card {
+  background: var(--color-bone);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.template-card h3 {
+  font-size: 1.1rem;
+  margin-top: 16px;
+}
+
+.template-card p {
+  font-size: 0.88rem;
+  color: var(--color-text-soft);
+  line-height: 1.55;
+}
+
+.template-card__swatches {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.template-swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.template-swatch:hover {
+  transform: scale(1.1);
+}
+
+.template-swatch--active {
+  border-color: var(--color-oxford);
+}
+
+/* Light mockup */
+.tmock {
+  width: 100%;
+  max-width: 230px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.tmock--light {
+  background: var(--color-white);
+  padding: 26px 16px 18px;
+}
+
+.tmock-light__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  background: linear-gradient(160deg, var(--mockup-accent), var(--color-gold-dark));
+}
+
+.tmock-light__name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--color-oxford);
+}
+
+.tmock-light__dates {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.7rem;
+  color: var(--color-text-soft);
+  margin-top: 2px;
+}
+
+.tmock-light__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 12px;
+}
+
+/* Dark mockup */
+.tmock--dark {
+  background: #0d0d11;
+  padding-bottom: 18px;
+}
+
+.tmock-dark__hero {
+  height: 46px;
+  background: linear-gradient(135deg, #1c2333, #0d0d11);
+}
+
+.tmock-dark__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: -25px auto 8px;
+  background: linear-gradient(135deg, var(--mockup-accent), #8a6d20, #f3e5ab);
+  border: 3px solid #14141c;
+}
+
+.tmock-dark__name {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  color: var(--mockup-accent);
+  text-align: center;
+}
+
+.tmock-dark__sub {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--mockup-accent);
+  opacity: 0.85;
+  text-align: center;
+  margin-top: 2px;
+}
+
+.tmock-dark__divider {
+  width: 36px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--mockup-accent), transparent);
+  margin: 8px auto;
+}
+
+.tmock-dark__tabs {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.tmock-pill {
+  font-size: 0.58rem;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-soft);
+}
+
+.tmock-pill--active {
+  background: var(--color-oxford);
+  border-color: var(--color-oxford);
+  color: var(--color-gold-soft);
+}
+
+.tmock-pill--dark {
+  background: #1a1a24;
+  border-color: #2a2a35;
+  color: #a0a0b0;
+}
+
+.tmock-pill--dark-active {
+  background: var(--mockup-accent);
+  border-color: var(--mockup-accent);
+  color: #0d0d11;
+}
+
+/* Custom card */
+.template-card--custom {
+  justify-content: center;
+  background: linear-gradient(160deg, var(--color-oxford), var(--color-deep-blue));
+  border-color: var(--color-oxford);
+}
+
+.template-card--custom h3 {
+  color: var(--color-white);
+}
+
+.template-card--custom p {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 8px;
+}
+
+.template-card__custom-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(198, 166, 100, 0.15);
+  color: var(--color-gold-soft);
+  display: grid;
+  place-items: center;
+}
+
+.template-card__custom-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+@media (min-width: 900px) {
+  .templates__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
