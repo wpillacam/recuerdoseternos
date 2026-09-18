@@ -97,3 +97,52 @@
   font-family: monospace;
   font-size: 0.78rem;
 }
+
+.admin-clients-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-client-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: var(--color-bone);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+}
+
+.admin-client-row__name {
+  font-weight: 500;
+  color: var(--color-oxford);
+}
+
+.admin-client-row__meta {
+  font-size: 0.82rem;
+  color: var(--color-text-soft);
+  margin-top: 2px;
+}
+
+.admin-client-row__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-client-row__actions .btn {
+  padding: 8px 16px;
+  font-size: 0.8rem;
+}
+
+.admin-contact-card {
+  background: var(--color-bone);
+}
+
+.admin-contact-card p {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  margin: 2px 0;
+}

@@ -7,6 +7,8 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import ClientPanel from "./pages/ClientPanel";
 import AdminPanel from "./pages/AdminPanel";
+import AdminClients from "./pages/AdminClients";
+import AdminMemorialEdit from "./pages/AdminMemorialEdit";
 import MemorialPage from "./pages/MemorialPage";
 
 function App() {
@@ -30,6 +32,22 @@ function App() {
               element={
                 <ProtectedRoute requireAdmin>
                   <AdminPanel />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/clients"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminClients />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/clients/:id"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminMemorialEdit />
                 </ProtectedRoute>
               }
             />

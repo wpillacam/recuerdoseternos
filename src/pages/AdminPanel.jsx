@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { supabase } from "../lib/supabaseClient";
 import { TEMPLATE_LIST } from "../templates";
@@ -92,9 +93,14 @@ export default function AdminPanel() {
           <img src={logoIcon} alt="Recuerdos Eternos" />
           <span>Recuerdos Eternos · Admin</span>
         </a>
-        <button className="btn btn-outline" onClick={signOut}>
-          Cerrar sesión
-        </button>
+        <div className="panel__header-actions">
+          <Link to="/admin/clients" className="btn btn-outline">
+            Clientes
+          </Link>
+          <button className="btn btn-outline" onClick={signOut}>
+            Cerrar sesión
+          </button>
+        </div>
       </header>
 
       <div className="container panel__body">
