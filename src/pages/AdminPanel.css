@@ -119,6 +119,31 @@
 .admin-client-row__name {
   font-weight: 500;
   color: var(--color-oxford);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-clients-hint {
+  font-size: 0.82rem;
+  color: var(--color-text-soft);
+  margin: -6px 0 12px;
+}
+
+.admin-client-row--demo {
+  border-color: var(--color-gold);
+  background: rgba(198, 166, 100, 0.08);
+}
+
+.admin-demo-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: var(--color-gold-dark, var(--color-gold));
+  border-radius: 4px;
+  padding: 2px 7px;
 }
 
 .admin-client-row__meta {

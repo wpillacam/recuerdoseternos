@@ -16,7 +16,7 @@ export default function AdminClients() {
     let active = true;
     supabase
       .from("memorials")
-      .select("id, full_name, template_id, client_contact_name, created_at")
+      .select("id, full_name, template_id, client_contact_name, created_at, is_demo")
       .order("created_at", { ascending: false })
       .then(({ data }) => {
         if (!active) return;
@@ -32,6 +32,32 @@ export default function AdminClients() {
     if (id === "custom") return "Personalizada";
     return TEMPLATES[id]?.label ?? id;
   };
+
+  const demoMemorials = memorials.filter((m) => m.is_demo);
+  const clientMemorials = memorials.filter((m) => !m.is_demo);
+
+  const renderRow = (m) => (
+    <div className={`admin-client-row ${m.is_demo ? "admin-client-row--demo" : ""}`} key={m.id}>
+      <div>
+        <p className="admin-client-row__name">
+          {m.is_demo && <span className="admin-demo-badge">DEMO</span>}
+          {m.full_name}
+        </p>
+        <p className="admin-client-row__meta">
+          {templateLabel(m.template_id)}
+          {m.client_contact_name && !m.is_demo ? ` · ${m.client_contact_name}` : ""}
+        </p>
+      </div>
+      <div className="admin-client-row__actions">
+        <a href={`/${m.id}`} target="_blank" rel="noreferrer" className="btn btn-outline">
+          Ver página
+        </a>
+        <Link to={`/admin/clients/${m.id}`} className="btn btn-gold">
+          Editar contenido
+        </Link>
+      </div>
+    </div>
+  );
 
   return (
     <div className="panel">
@@ -51,37 +77,32 @@ export default function AdminClients() {
       </header>
 
       <div className="container panel__body">
-        <section className="panel__section">
-          <h2>Clientes</h2>
-
-          {loading ? (
+        {loading ? (
+          <section className="panel__section">
             <p>Cargando…</p>
-          ) : memorials.length === 0 ? (
-            <p>Todavía no has creado ningún cliente.</p>
-          ) : (
-            <div className="admin-clients-list">
-              {memorials.map((m) => (
-                <div className="admin-client-row" key={m.id}>
-                  <div>
-                    <p className="admin-client-row__name">{m.full_name}</p>
-                    <p className="admin-client-row__meta">
-                      {templateLabel(m.template_id)}
-                      {m.client_contact_name ? ` · ${m.client_contact_name}` : ""}
-                    </p>
-                  </div>
-                  <div className="admin-client-row__actions">
-                    <a href={`/${m.id}`} target="_blank" rel="noreferrer" className="btn btn-outline">
-                      Ver página
-                    </a>
-                    <Link to={`/admin/clients/${m.id}`} className="btn btn-gold">
-                      Editar contenido
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-        </section>
+          </section>
+        ) : (
+          <>
+            {demoMemorials.length > 0 && (
+              <section className="panel__section">
+                <h2>Demos de venta</h2>
+                <p className="admin-clients-hint">
+                  Úsalos para mostrarle a un cliente potencial cómo se vería su memorial antes de que decida.
+                </p>
+                <div className="admin-clients-list">{demoMemorials.map(renderRow)}</div>
+              </section>
+            )}
+
+            <section className="panel__section">
+              <h2>Clientes</h2>
+              {clientMemorials.length === 0 ? (
+                <p>Todavía no has creado ningún cliente.</p>
+              ) : (
+                <div className="admin-clients-list">{clientMemorials.map(renderRow)}</div>
+              )}
+            </section>
+          </>
+        )}
       </div>
     </div>
   );
