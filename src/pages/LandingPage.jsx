@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import About from "../components/About";
 import HowItWorks from "../components/HowItWorks";
 import Differentiators from "../components/Differentiators";
+import ImportantDates from "../components/ImportantDates";
 import Catalog from "../components/Catalog";
 import Templates from "../components/Templates";
 import PhonePreview from "../components/PhonePreview";
@@ -19,6 +20,7 @@ export default function LandingPage() {
         <About />
         <HowItWorks />
         <Differentiators />
+        <ImportantDates />
         <Catalog />
         <Templates />
         <PhonePreview />

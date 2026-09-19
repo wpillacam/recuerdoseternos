@@ -92,6 +92,32 @@ export const translations = {
         },
       ],
     },
+    dates: {
+      eyebrow: "Nunca lo olvidamos",
+      title: "Acompañamos cada fecha importante",
+      sub: "Un memorial no es solo para el día del entierro: seguimos ahí, año tras año, en cada fecha que importa para tu familia.",
+      items: [
+        {
+          title: "Aniversario de fallecimiento",
+          detail:
+            "Cada año, en la fecha exacta, te lo recordamos por WhatsApp para que tu familia se reúna a honrar su memoria.",
+        },
+        {
+          title: "Cumpleaños del ser querido",
+          detail: "Celebramos su vida, no solo su partida: también te avisamos en la fecha de su cumpleaños.",
+        },
+        {
+          title: "Día de los Difuntos",
+          detail:
+            "El 1 y 2 de noviembre, cuando el Perú entero visita a sus seres queridos, tu memorial se viste con un mensaje especial para acompañarte en esta fecha tan nuestra.",
+        },
+        {
+          title: "La fecha que tú elijas",
+          detail:
+            "¿Hay otro día significativo para tu familia? Un aniversario de bodas, un bautizo, lo que sea: lo programamos para que nunca se te pase.",
+        },
+      ],
+    },
     templates: {
       eyebrow: "Elige un estilo",
       title: "Así se vería su memorial",
@@ -366,6 +392,30 @@ export const translations = {
           title: "Public or private memorial",
           detail:
             "You decide who can see it: public for anyone who scans the code, or private only for those with the family link.",
+        },
+      ],
+    },
+    dates: {
+      eyebrow: "We never forget",
+      title: "We're there for every important date",
+      sub: "A memorial isn't just for the day of the burial: we stay with your family, year after year, on every date that matters.",
+      items: [
+        {
+          title: "Anniversary of passing",
+          detail: "Every year, on the exact date, we remind you on WhatsApp so your family can gather to honor their memory.",
+        },
+        {
+          title: "Their birthday",
+          detail: "We celebrate their life, not just their passing: we also notify you on their birthday.",
+        },
+        {
+          title: "Day of the Dead",
+          detail:
+            "On November 1st and 2nd, when all of Peru visits their loved ones, your memorial carries a special message to accompany you on this deeply rooted date.",
+        },
+        {
+          title: "Any date you choose",
+          detail: "Another meaningful day for your family? A wedding anniversary, a baptism, anything: we'll schedule it so you never miss it.",
         },
       ],
     },
