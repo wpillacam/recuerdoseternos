@@ -20,6 +20,12 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const lines = [
+      `Hola, soy ${form.nombre} (tel: ${form.telefono}).`,
+      form.mensaje && form.mensaje.trim() ? form.mensaje.trim() : "Quisiera información sobre sus servicios.",
+    ];
+    const text = encodeURIComponent(lines.join(" "));
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, "_blank", "noopener,noreferrer");
     setSent(true);
   };
 
