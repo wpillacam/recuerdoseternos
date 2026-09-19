@@ -16,7 +16,7 @@ export default function AdminClients() {
     let active = true;
     supabase
       .from("memorials")
-      .select("id, full_name, template_id, client_contact_name, created_at, is_demo")
+      .select("id, full_name, template_id, client_contact_name, created_at, is_demo, is_placeholder")
       .order("created_at", { ascending: false })
       .then(({ data }) => {
         if (!active) return;
@@ -34,18 +34,25 @@ export default function AdminClients() {
   };
 
   const demoMemorials = memorials.filter((m) => m.is_demo);
-  const clientMemorials = memorials.filter((m) => !m.is_demo);
+  const availableMemorials = memorials.filter((m) => m.is_placeholder && !m.is_demo);
+  const clientMemorials = memorials.filter((m) => !m.is_demo && !m.is_placeholder);
 
   const renderRow = (m) => (
-    <div className={`admin-client-row ${m.is_demo ? "admin-client-row--demo" : ""}`} key={m.id}>
+    <div
+      className={`admin-client-row ${m.is_demo ? "admin-client-row--demo" : ""} ${
+        m.is_placeholder ? "admin-client-row--available" : ""
+      }`}
+      key={m.id}
+    >
       <div>
         <p className="admin-client-row__name">
           {m.is_demo && <span className="admin-demo-badge">DEMO</span>}
-          {m.full_name}
+          {m.is_placeholder && <span className="admin-available-badge">DISPONIBLE</span>}
+          {m.is_placeholder ? m.id : m.full_name}
         </p>
         <p className="admin-client-row__meta">
           {templateLabel(m.template_id)}
-          {m.client_contact_name && !m.is_demo ? ` · ${m.client_contact_name}` : ""}
+          {m.client_contact_name && !m.is_demo && !m.is_placeholder ? ` · ${m.client_contact_name}` : ""}
         </p>
       </div>
       <div className="admin-client-row__actions">
@@ -90,6 +97,17 @@ export default function AdminClients() {
                   Úsalos para mostrarle a un cliente potencial cómo se vería su memorial antes de que decida.
                 </p>
                 <div className="admin-clients-list">{demoMemorials.map(renderRow)}</div>
+              </section>
+            )}
+
+            {availableMemorials.length > 0 && (
+              <section className="panel__section">
+                <h2>Disponibles (QR ya impresos, sin asignar)</h2>
+                <p className="admin-clients-hint">
+                  Entrégaselos a un cliente que compra en el momento y luego carga el contenido real
+                  aquí mismo — deja de aparecer como "disponible" en cuanto guardes cambios.
+                </p>
+                <div className="admin-clients-list">{availableMemorials.map(renderRow)}</div>
               </section>
             )}
 

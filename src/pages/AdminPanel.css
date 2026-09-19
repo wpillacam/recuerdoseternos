@@ -146,6 +146,22 @@
   padding: 2px 7px;
 }
 
+.admin-client-row--available {
+  border-color: #8fb3e0;
+  background: rgba(143, 179, 224, 0.08);
+}
+
+.admin-available-badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: #6d93bd;
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+
 .admin-client-row__meta {
   font-size: 0.82rem;
   color: var(--color-text-soft);

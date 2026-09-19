@@ -6,6 +6,8 @@ import { TEMPLATES } from "../templates";
 import logoIcon from "../assets/logo-icon.png";
 import "./MemorialPage.css";
 
+const WHATSAPP_NUMBER = "51914772762";
+
 export default function MemorialPage() {
   const { uuid } = useParams();
   const { t, lang, setLang } = useLanguage();
@@ -41,6 +43,11 @@ export default function MemorialPage() {
         return;
       }
       setMemorial(memorialRow);
+
+      if (memorialRow.is_placeholder) {
+        setStatus("available");
+        return;
+      }
 
       if (memorialRow.template_id === "custom") {
         setStatus("ready");
@@ -154,6 +161,26 @@ export default function MemorialPage() {
         <p>{mp.notFoundText}</p>
         <a href="/" className="btn btn-gold">
           {mp.backHome}
+        </a>
+      </div>
+    );
+  }
+
+  if (status === "available") {
+    return (
+      <div className="memorial-available">
+        <img src={logoIcon} alt="" />
+        <h1>{mp.availableTitle}</h1>
+        <p>{mp.availableText}</p>
+        <a
+          className="btn btn-whatsapp"
+          href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+            "Hola, quiero crear un memorial digital con Recuerdos Eternos."
+          )}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {mp.availableCta}
         </a>
       </div>
     );

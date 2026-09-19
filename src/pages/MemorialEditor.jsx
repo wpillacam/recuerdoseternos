@@ -77,6 +77,7 @@ export default function MemorialEditor({ memorialId }) {
         biography: memorial.biography,
         video_url: memorial.video_url,
         is_public: memorial.is_public,
+        is_placeholder: false,
       })
       .eq("id", memorial.id);
 

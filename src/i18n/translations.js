@@ -287,6 +287,10 @@ export const translations = {
       notFoundTitle: "Memorial no encontrado",
       notFoundText: "Verifica el enlace o el código QR. Si el problema persiste, contáctanos.",
       backHome: "Volver al inicio",
+      availableTitle: "Este espacio está disponible",
+      availableText:
+        "Este código QR aún no ha sido activado. Si quieres crear un memorial digital para tu ser querido, escríbenos y lo dejamos listo.",
+      availableCta: "Consultar por WhatsApp",
       noBio: "Aún no se ha agregado la biografía.",
       noTimeline: "Aún no se han agregado momentos a la línea de vida.",
       noPhotos: "Aún no se han subido fotos.",
@@ -588,6 +592,10 @@ export const translations = {
       notFoundTitle: "Memorial not found",
       notFoundText: "Check the link or QR code. If the problem continues, contact us.",
       backHome: "Back to home",
+      availableTitle: "This space is available",
+      availableText:
+        "This QR code hasn't been activated yet. If you'd like to create a digital memorial for your loved one, message us and we'll set it up.",
+      availableCta: "Ask on WhatsApp",
       noBio: "The biography hasn't been added yet.",
       noTimeline: "No life timeline moments have been added yet.",
       noPhotos: "No photos have been uploaded yet.",
