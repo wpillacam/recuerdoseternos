@@ -97,6 +97,9 @@ export default function AdminPanel() {
           <Link to="/admin/clients" className="btn btn-outline">
             Clientes
           </Link>
+          <Link to="/admin/reports" className="btn btn-outline">
+            Reportes
+          </Link>
           <button className="btn btn-outline" onClick={signOut}>
             Cerrar sesión
           </button>

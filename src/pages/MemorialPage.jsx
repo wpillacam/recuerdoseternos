@@ -8,6 +8,14 @@ import "./MemorialPage.css";
 
 const WHATSAPP_NUMBER = "51914772762";
 
+function todayKey() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function candleStorageKey(uuid) {
+  return `re_candle_${uuid}`;
+}
+
 export default function MemorialPage() {
   const { uuid } = useParams();
   const { t, lang, setLang } = useLanguage();
@@ -43,6 +51,13 @@ export default function MemorialPage() {
         return;
       }
       setMemorial(memorialRow);
+
+      try {
+        const lastLit = localStorage.getItem(candleStorageKey(uuid));
+        if (lastLit === todayKey()) setLit(true);
+      } catch {
+        // localStorage puede fallar en modo privado; no es crítico.
+      }
 
       if (memorialRow.is_placeholder) {
         setStatus("available");
@@ -92,6 +107,11 @@ export default function MemorialPage() {
   const handleLightCandle = async () => {
     if (lit || !memorial) return;
     setLit(true);
+    try {
+      localStorage.setItem(candleStorageKey(uuid), todayKey());
+    } catch {
+      // localStorage puede fallar en modo privado; no es crítico.
+    }
     setMemorial((m) => ({ ...m, candle_count: (m.candle_count ?? 0) + 1 }));
     await supabase.rpc("increment_candle", { memorial_id_input: uuid });
   };
@@ -115,14 +135,15 @@ export default function MemorialPage() {
   };
 
   const handleListen = () => {
-    if (typeof window === "undefined" || !("speechSynthesis" in window) || !memorial?.biography) return;
+    const bioText = lang === "qu" && memorial?.biography_qu ? memorial.biography_qu : memorial?.biography;
+    if (typeof window === "undefined" || !("speechSynthesis" in window) || !bioText) return;
     if (speaking) {
       window.speechSynthesis.cancel();
       setSpeaking(false);
       return;
     }
-    const utter = new SpeechSynthesisUtterance(memorial.biography);
-    utter.lang = lang === "en" ? "en-US" : "es-PE";
+    const utter = new SpeechSynthesisUtterance(bioText);
+    utter.lang = "es-PE";
     utter.onend = () => setSpeaking(false);
     utter.onerror = () => setSpeaking(false);
     window.speechSynthesis.cancel();

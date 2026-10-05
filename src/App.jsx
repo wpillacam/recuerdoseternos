@@ -9,6 +9,7 @@ import ClientPanel from "./pages/ClientPanel";
 import AdminPanel from "./pages/AdminPanel";
 import AdminClients from "./pages/AdminClients";
 import AdminMemorialEdit from "./pages/AdminMemorialEdit";
+import AdminReports from "./pages/AdminReports";
 import MemorialPage from "./pages/MemorialPage";
 
 function App() {
@@ -48,6 +49,14 @@ function App() {
               element={
                 <ProtectedRoute requireAdmin>
                   <AdminMemorialEdit />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/reports"
+              element={
+                <ProtectedRoute requireAdmin>
+                  <AdminReports />
                 </ProtectedRoute>
               }
             />

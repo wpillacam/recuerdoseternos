@@ -77,6 +77,9 @@ export default function AdminClients() {
           <Link to="/admin" className="btn btn-outline">
             + Crear cliente
           </Link>
+          <Link to="/admin/reports" className="btn btn-outline">
+            Reportes
+          </Link>
           <button className="btn btn-outline" onClick={signOut}>
             Cerrar sesión
           </button>
