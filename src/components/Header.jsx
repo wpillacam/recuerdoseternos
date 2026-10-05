@@ -44,7 +44,7 @@ export default function Header() {
             ))}
           </ul>
 
-          <div className="header__lang" role="group" aria-label="Idioma / Language">
+          <div className="header__lang" role="group" aria-label="Idioma / Simi">
             <button
               className={lang === "es" ? "header__lang-btn header__lang-btn--active" : "header__lang-btn"}
               onClick={() => setLang("es")}
@@ -52,10 +52,10 @@ export default function Header() {
               ES
             </button>
             <button
-              className={lang === "en" ? "header__lang-btn header__lang-btn--active" : "header__lang-btn"}
-              onClick={() => setLang("en")}
+              className={lang === "qu" ? "header__lang-btn header__lang-btn--active" : "header__lang-btn"}
+              onClick={() => setLang("qu")}
             >
-              EN
+              QU
             </button>
           </div>
 

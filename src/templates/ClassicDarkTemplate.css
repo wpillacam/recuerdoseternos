@@ -351,6 +351,12 @@
   color: var(--tpl-accent, #f3e5ab);
 }
 
+.tpld-candle-note {
+  margin-top: 10px;
+  font-size: 0.74rem;
+  color: #8a8a9a;
+}
+
 .tpld-btn-gold {
   background: linear-gradient(135deg, var(--tpl-accent, #d4af37) 0%, #a67c1e 100%);
   color: #0d0d11;
@@ -382,12 +388,37 @@
   padding-bottom: 25px;
 }
 
-.tpld-gallery img {
+.tpld-gallery__item {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tpld-gallery__item img {
   width: 100%;
   height: 110px;
   object-fit: cover;
   border-radius: 8px;
   border: 1px solid #2a2a38;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.tpld-gallery__item:hover img,
+.tpld-gallery__item:focus-visible img {
+  transform: scale(1.06);
+  filter: brightness(1.1);
+}
+
+.tpld-song-title {
+  font-style: italic;
+  color: var(--tpl-accent, #d4af37);
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .tpld-video {

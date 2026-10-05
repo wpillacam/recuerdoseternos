@@ -76,6 +76,8 @@ export default function MemorialEditor({ memorialId }) {
         quechua_phrase: memorial.quechua_phrase,
         biography: memorial.biography,
         video_url: memorial.video_url,
+        song_url: memorial.song_url,
+        song_title: memorial.song_title,
         is_public: memorial.is_public,
         is_placeholder: false,
       })
@@ -225,6 +227,26 @@ export default function MemorialEditor({ memorialId }) {
               value={memorial.video_url ?? ""}
               onChange={(e) => updateField("video_url", e.target.value)}
               placeholder="https://..."
+            />
+          </label>
+
+          <label>
+            Título de la canción (opcional)
+            <input
+              type="text"
+              value={memorial.song_title ?? ""}
+              onChange={(e) => updateField("song_title", e.target.value)}
+              placeholder='Ej. "Su canción favorita"'
+            />
+          </label>
+
+          <label>
+            Enlace de YouTube de la canción
+            <input
+              type="text"
+              value={memorial.song_url ?? ""}
+              onChange={(e) => updateField("song_url", e.target.value)}
+              placeholder="https://www.youtube.com/watch?v=..."
             />
           </label>
 

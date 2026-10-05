@@ -16,8 +16,8 @@ insert into memorials (
   'Rocky', '2015-06-10', '2024-03-02',
   'Sonqoykipi wiñaypaq kawsanki',
   'Rocky llego a la familia siendo un cachorro que cabia en una sola mano y se fue nueve anios despues habiendo ocupado todo el corazon de la casa. Recibia a cada visita moviendo la cola como si fuera la mejor noticia del dia, dormia en el sofa prohibido apenas nadie miraba, y nunca dejo pasar una pelota sin perseguirla hasta el cansancio. Fue guardian, companiero de tardes lluviosas y el primero en consolar cuando algo salia mal.',
-  'https://loremflickr.com/400/400/dog,goldenretriever?lock=101',
-  'https://loremflickr.com/1200/500/dog?lock=102',
+  'https://placedog.net/500/500?id=10',
+  'https://placedog.net/1200/500?id=15',
   'Guardián de la casa y mejor amigo de la familia',
   'La lealtad más pura que puede sentir un corazón',
   'Bajo la mesa de la cocina, en una tarde lluviosa de junio',
@@ -58,9 +58,9 @@ insert into family_members (memorial_id, name, relation, sort_order) values
 
 delete from memorial_photos where memorial_id = 'd0000000-0000-0000-0000-000000000004';
 insert into memorial_photos (memorial_id, url, caption, sort_order) values
-  ('d0000000-0000-0000-0000-000000000004', 'https://loremflickr.com/800/600/dog,puppy?lock=103', 'Su primer día en casa', 1),
-  ('d0000000-0000-0000-0000-000000000004', 'https://loremflickr.com/800/600/dog,sofa?lock=104', 'Durmiendo en "su" sofá', 2),
-  ('d0000000-0000-0000-0000-000000000004', 'https://loremflickr.com/800/600/dog,park?lock=105', 'Persiguiendo la pelota en el parque', 3);
+  ('d0000000-0000-0000-0000-000000000004', 'https://placedog.net/800/600?id=20', 'Su primer día en casa', 1),
+  ('d0000000-0000-0000-0000-000000000004', 'https://placedog.net/800/600?id=25', 'Durmiendo en "su" sofá', 2),
+  ('d0000000-0000-0000-0000-000000000004', 'https://placedog.net/800/600?id=30', 'Persiguiendo la pelota en el parque', 3);
 
 -- ============================================================
 -- DEMO 5: Clasica Oscura -- Silvestre (gato)
@@ -75,8 +75,8 @@ insert into memorials (
   'Silvestre', '2012-10-31', '2023-08-19',
   'Kausayninchik mana tukukunchu',
   'Silvestre aparecio un dia en el techo de la casa y decidio, con la autoridad silenciosa de todo gato, que ese seria su hogar. Nunca pidio permiso para nada: elegia su propio horario, dormia donde queria y solo aparecia por cariño cuando le convenia. Pero en las noches frias siempre terminaba acurrucado en la misma cama, y fue testigo silencioso de cada conversacion importante en esa casa durante once anios.',
-  'https://loremflickr.com/400/400/cat,blackcat?lock=201',
-  'https://loremflickr.com/1200/500/cat,night?lock=202',
+  'https://cataas.com/cat/04eEQhDfAL8l5nt3?width=500&height=500',
+  'https://cataas.com/cat/05Xd4JtN14983pns?width=1200&height=500',
   'Cazador nocturno y filósofo de la casa',
   'Independiente hasta el final, fiel a su manera',
   'Un techo del barrio, una noche de Halloween',
@@ -117,6 +117,6 @@ insert into family_members (memorial_id, name, relation, sort_order) values
 
 delete from memorial_photos where memorial_id = 'd0000000-0000-0000-0000-000000000005';
 insert into memorial_photos (memorial_id, url, caption, sort_order) values
-  ('d0000000-0000-0000-0000-000000000005', 'https://loremflickr.com/800/600/cat,window?lock=203', 'Vigilando desde la ventana', 1),
-  ('d0000000-0000-0000-0000-000000000005', 'https://loremflickr.com/800/600/cat,sun?lock=204', 'Su siesta favorita al sol', 2),
-  ('d0000000-0000-0000-0000-000000000005', 'https://loremflickr.com/800/600/cat,funny?lock=205', 'La foto que casi no se dejó tomar', 3);
+  ('d0000000-0000-0000-0000-000000000005', 'https://cataas.com/cat/09wFxpacQzvf9jfM?width=800&height=600', 'Vigilando desde la ventana', 1),
+  ('d0000000-0000-0000-0000-000000000005', 'https://cataas.com/cat/0B2g7aTANObiqPJJ?width=800&height=600', 'Su siesta favorita al sol', 2),
+  ('d0000000-0000-0000-0000-000000000005', 'https://cataas.com/cat/0BTTVEVWXNyOgXYd?width=800&height=600', 'La foto que casi no se dejó tomar', 3);

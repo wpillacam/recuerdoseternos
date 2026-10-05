@@ -177,6 +177,17 @@ $demohtml$<!doctype html>
   .note { font-size: 0.9rem; color: #a9a196; line-height: 1.6; }
   .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 32px 0; }
   .gallery img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; }
+  .condolences { margin-top: 48px; text-align: left; }
+  .condolences h2 { font-size: 1.3rem; color: #e9c46a; text-align: center; margin-bottom: 20px; font-weight: normal; letter-spacing: 1px; }
+  .c-form { display: flex; flex-direction: column; gap: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(233,196,106,0.25); border-radius: 10px; padding: 20px; }
+  .c-form input, .c-form textarea { font-family: inherit; font-size: 0.95rem; background: rgba(0,0,0,0.35); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 10px 12px; color: #f2ede4; resize: vertical; }
+  .c-form input::placeholder, .c-form textarea::placeholder { color: #8a8478; }
+  .c-form button { align-self: center; margin-top: 4px; background: linear-gradient(135deg,#e9c46a,#b9903f); color: #101014; border: none; border-radius: 20px; padding: 10px 26px; font-family: inherit; font-size: 0.95rem; cursor: pointer; }
+  .c-list { margin-top: 22px; display: flex; flex-direction: column; gap: 14px; }
+  .c-item { border-left: 2px solid #e9c46a; padding-left: 14px; }
+  .c-item strong { display: block; color: #e9c46a; font-size: 0.95rem; }
+  .c-item p { margin-top: 2px; font-size: 0.9rem; color: #cfc7b8; line-height: 1.5; }
+  .c-empty { text-align: center; font-size: 0.9rem; color: #8a8478; font-style: italic; }
 </style>
 </head>
 <body>
@@ -195,7 +206,71 @@ $demohtml$<!doctype html>
       <img src="https://picsum.photos/seed/demo-custom-3/300/300" alt="" />
     </div>
     <p class="note">Este es solo un ejemplo del tipo de diseño exclusivo que se crea desde cero para cada familia que elige la opción personalizada. Colores, tipografía, orden de las secciones y estilo visual se adaptan completamente a la historia de cada persona.</p>
+
+    <div class="condolences">
+      <h2>Condolencias</h2>
+      <form class="c-form" id="c-form">
+        <input type="text" id="c-name" placeholder="Tu nombre" required />
+        <textarea id="c-message" rows="3" placeholder="Escribe tus condolencias..." required></textarea>
+        <button type="submit">Enviar mensaje</button>
+      </form>
+      <div class="c-list" id="c-list"></div>
+    </div>
   </main>
+
+  <script>
+    var SUPABASE_URL = "https://zqdfxiuqkuoblzozgqrk.supabase.co";
+    var SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpxZGZ4aXVxa3VvYmx6b3pncXJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk2OTc1OTUsImV4cCI6MjEwNTI3MzU5NX0.W5k7UPxj-GGX5LNfp2HczwK8cIQjovR_BhsL6OyTPn8";
+    var MEMORIAL_ID = "d0000000-0000-0000-0000-000000000003";
+
+    function escapeHtml(str) {
+      var div = document.createElement("div");
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function loadCondolences() {
+      fetch(SUPABASE_URL + "/rest/v1/condolences?select=*&memorial_id=eq." + MEMORIAL_ID + "&order=created_at.desc", {
+        headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY }
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          var list = document.getElementById("c-list");
+          if (!data || !data.length) {
+            list.innerHTML = '<p class="c-empty">Sé el primero en dejar un mensaje.</p>';
+            return;
+          }
+          list.innerHTML = data.map(function (c) {
+            return '<div class="c-item"><strong>' + escapeHtml(c.author_name) + "</strong><p>" + escapeHtml(c.message) + "</p></div>";
+          }).join("");
+        });
+    }
+
+    document.getElementById("c-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var nameEl = document.getElementById("c-name");
+      var messageEl = document.getElementById("c-message");
+      var author_name = nameEl.value.trim();
+      var message = messageEl.value.trim();
+      if (!author_name || !message) return;
+      fetch(SUPABASE_URL + "/rest/v1/condolences", {
+        method: "POST",
+        headers: {
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: "Bearer " + SUPABASE_ANON_KEY,
+          "Content-Type": "application/json",
+          Prefer: "return=minimal"
+        },
+        body: JSON.stringify({ memorial_id: MEMORIAL_ID, author_name: author_name, message: message })
+      }).then(function () {
+        nameEl.value = "";
+        messageEl.value = "";
+        loadCondolences();
+      });
+    });
+
+    loadCondolences();
+  </script>
 </body>
 </html>
 $demohtml$,

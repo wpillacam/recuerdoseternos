@@ -1,8 +1,12 @@
+import { useState } from "react";
 import logoIcon from "../assets/logo-icon.png";
 import { formatDate } from "./dateUtils";
+import { loc } from "./localize";
+import { toYoutubeEmbed } from "./youtube";
+import PhotoLightbox from "./PhotoLightbox";
 import "./ClassicDarkTemplate.css";
 
-const BASE_TABS = ["bio", "timeline", "vela", "album", "video", "arbol", "condolencias"];
+const BASE_TABS = ["bio", "timeline", "vela", "album", "video", "cancion", "arbol", "condolencias"];
 
 export default function ClassicDarkTemplate({
   memorial,
@@ -28,11 +32,15 @@ export default function ClassicDarkTemplate({
 }) {
   const p = t.preview;
   const mp = t.memorialPage;
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url);
-  const dateRange = [formatDate(memorial.birth_date, lang), formatDate(memorial.death_date, lang)]
+  const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url).filter(
+    (id) => id !== "cancion" || memorial.song_url
+  );
+  const dateRange = [formatDate(memorial.birth_date), formatDate(memorial.death_date)]
     .filter(Boolean)
     .join(" — ");
+  const localizedPhotos = photos.map((photo) => ({ ...photo, caption: loc(photo, "caption", lang) }));
 
   const renderTab = () => {
     switch (tab) {
@@ -51,7 +59,7 @@ export default function ClassicDarkTemplate({
                 {speaking ? p.stopBio : p.listenBio}
               </button>
             )}
-            <p>{memorial.biography || mp.noBio}</p>
+            <p>{loc(memorial, "biography", lang) || mp.noBio}</p>
           </div>
         );
       case "timeline":
@@ -60,7 +68,7 @@ export default function ClassicDarkTemplate({
             {events.map((ev) => (
               <div className="tpld-timeline__item" key={ev.id}>
                 <span className="tpld-timeline__year">{ev.year_label}</span>
-                <span className="tpld-timeline__text">{ev.description}</span>
+                <span className="tpld-timeline__text">{loc(ev, "description", lang)}</span>
               </div>
             ))}
           </div>
@@ -81,13 +89,22 @@ export default function ClassicDarkTemplate({
             <button className="tpld-btn-gold" onClick={onLightCandle} disabled={lit}>
               🕯️ {lit ? p.candleLit : p.candleLight}
             </button>
+            <p className="tpld-candle-note">{p.candleDailyNote}</p>
           </div>
         );
       case "album":
-        return photos.length ? (
+        return localizedPhotos.length ? (
           <div className="tpld-gallery">
-            {photos.map((photo) => (
-              <img key={photo.id} src={photo.url} alt={photo.caption || ""} />
+            {localizedPhotos.map((photo, i) => (
+              <button
+                type="button"
+                className="tpld-gallery__item"
+                key={photo.id}
+                onClick={() => setLightboxIndex(i)}
+                aria-label={photo.caption || mp.noPhotos}
+              >
+                <img src={photo.url} alt={photo.caption || ""} />
+              </button>
             ))}
           </div>
         ) : (
@@ -106,6 +123,22 @@ export default function ClassicDarkTemplate({
         ) : (
           <p className="tpld-empty">{mp.noVideo}</p>
         );
+      case "cancion":
+        return memorial.song_url ? (
+          <div>
+            {memorial.song_title && <p className="tpld-song-title">{memorial.song_title}</p>}
+            <div className="tpld-video">
+              <iframe
+                src={toYoutubeEmbed(memorial.song_url)}
+                title="cancion"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        ) : (
+          <p className="tpld-empty">{mp.noSong}</p>
+        );
       case "arbol":
         return members.length ? (
           <div className="tpld-tree">
@@ -114,7 +147,7 @@ export default function ClassicDarkTemplate({
               {members.map((m) => (
                 <div className="tpld-tree__node" key={m.id}>
                   {m.name}
-                  {m.relation && <small> · {m.relation}</small>}
+                  {m.relation && <small> · {loc(m, "relation", lang)}</small>}
                 </div>
               ))}
             </div>
@@ -178,10 +211,10 @@ export default function ClassicDarkTemplate({
               ES
             </button>
             <button
-              className={lang === "en" ? "tpld-lang-btn tpld-lang-btn--active" : "tpld-lang-btn"}
-              onClick={() => setLang("en")}
+              className={lang === "qu" ? "tpld-lang-btn tpld-lang-btn--active" : "tpld-lang-btn"}
+              onClick={() => setLang("qu")}
             >
-              EN
+              QU
             </button>
           </div>
           <button className="tpld-share" onClick={onShare}>
@@ -210,10 +243,10 @@ export default function ClassicDarkTemplate({
             )}
           </div>
           <h1 className="tpld-title">{memorial.full_name}</h1>
-          {memorial.occupation && <p className="tpld-subtitle">{memorial.occupation}</p>}
+          {memorial.occupation && <p className="tpld-subtitle">{loc(memorial, "occupation", lang)}</p>}
           {dateRange && <p className="tpld-dates">{dateRange}</p>}
           <div className="tpld-divider" />
-          {memorial.featured_quote && <p className="tpld-quote">“{memorial.featured_quote}”</p>}
+          {memorial.featured_quote && <p className="tpld-quote">“{loc(memorial, "featured_quote", lang)}”</p>}
           {memorial.quechua_phrase && <p className="tpld-quechua">{memorial.quechua_phrase}</p>}
           <p className="tpld-visits">
             👁 {memorial.visit_count ?? 0} {mp.visits}
@@ -242,6 +275,13 @@ export default function ClassicDarkTemplate({
           <p className="tpld-footer-sub">Recuerdos Eternos · Perú</p>
         </div>
       </div>
+
+      <PhotoLightbox
+        photos={localizedPhotos}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={(dir) => setLightboxIndex((i) => (i + dir + photos.length) % photos.length)}
+      />
     </div>
   );
 }

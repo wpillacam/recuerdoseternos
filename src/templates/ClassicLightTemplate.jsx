@@ -1,8 +1,12 @@
+import { useState } from "react";
 import logoIcon from "../assets/logo-icon.png";
 import { formatDate } from "./dateUtils";
+import { loc } from "./localize";
+import { toYoutubeEmbed } from "./youtube";
+import PhotoLightbox from "./PhotoLightbox";
 import "./ClassicLightTemplate.css";
 
-const BASE_TABS = ["bio", "timeline", "vela", "album", "video", "arbol", "condolencias"];
+const BASE_TABS = ["bio", "timeline", "vela", "album", "video", "cancion", "arbol", "condolencias"];
 
 export default function ClassicLightTemplate({
   memorial,
@@ -28,11 +32,15 @@ export default function ClassicLightTemplate({
 }) {
   const p = t.preview;
   const mp = t.memorialPage;
+  const [lightboxIndex, setLightboxIndex] = useState(null);
 
-  const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url);
-  const dateRange = [formatDate(memorial.birth_date, lang), formatDate(memorial.death_date, lang)]
+  const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url).filter(
+    (id) => id !== "cancion" || memorial.song_url
+  );
+  const dateRange = [formatDate(memorial.birth_date), formatDate(memorial.death_date)]
     .filter(Boolean)
     .join(" — ");
+  const localizedPhotos = photos.map((photo) => ({ ...photo, caption: loc(photo, "caption", lang) }));
 
   const renderTab = () => {
     switch (tab) {
@@ -54,7 +62,7 @@ export default function ClassicLightTemplate({
                 {speaking ? p.stopBio : p.listenBio}
               </button>
             )}
-            <p>{memorial.biography || mp.noBio}</p>
+            <p>{loc(memorial, "biography", lang) || mp.noBio}</p>
           </div>
         );
       case "timeline":
@@ -63,7 +71,7 @@ export default function ClassicLightTemplate({
             {events.map((ev) => (
               <div className="mem-timeline__item" key={ev.id}>
                 <span className="mem-timeline__year">{ev.year_label}</span>
-                <span className="mem-timeline__text">{ev.description}</span>
+                <span className="mem-timeline__text">{loc(ev, "description", lang)}</span>
               </div>
             ))}
           </div>
@@ -85,15 +93,22 @@ export default function ClassicLightTemplate({
             <p className="mem-candle__count">
               <strong>{memorial.candle_count ?? 0}</strong> {p.candleCount}
             </p>
+            <p className="mem-candle__note">{p.candleDailyNote}</p>
           </div>
         );
       case "album":
-        return photos.length ? (
+        return localizedPhotos.length ? (
           <div className="mem-grid">
-            {photos.map((photo) => (
-              <div className="mem-grid__item" key={photo.id}>
+            {localizedPhotos.map((photo, i) => (
+              <button
+                type="button"
+                className="mem-grid__item"
+                key={photo.id}
+                onClick={() => setLightboxIndex(i)}
+                aria-label={photo.caption || mp.noPhotos}
+              >
                 <img src={photo.url} alt={photo.caption || ""} />
-              </div>
+              </button>
             ))}
           </div>
         ) : (
@@ -112,6 +127,22 @@ export default function ClassicLightTemplate({
         ) : (
           <p className="mem-empty">{mp.noVideo}</p>
         );
+      case "cancion":
+        return memorial.song_url ? (
+          <div>
+            {memorial.song_title && <p className="mem-song-title">{memorial.song_title}</p>}
+            <div className="mem-video">
+              <iframe
+                src={toYoutubeEmbed(memorial.song_url)}
+                title="cancion"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        ) : (
+          <p className="mem-empty">{mp.noSong}</p>
+        );
       case "arbol":
         return members.length ? (
           <div className="mem-tree">
@@ -120,7 +151,7 @@ export default function ClassicLightTemplate({
               {members.map((m) => (
                 <div className="mem-tree__node" key={m.id}>
                   {m.name}
-                  {m.relation && <small> · {m.relation}</small>}
+                  {m.relation && <small> · {loc(m, "relation", lang)}</small>}
                 </div>
               ))}
             </div>
@@ -190,11 +221,11 @@ export default function ClassicLightTemplate({
             </button>
             <button
               className={
-                lang === "en" ? "memorial-page__lang-btn memorial-page__lang-btn--active" : "memorial-page__lang-btn"
+                lang === "qu" ? "memorial-page__lang-btn memorial-page__lang-btn--active" : "memorial-page__lang-btn"
               }
-              onClick={() => setLang("en")}
+              onClick={() => setLang("qu")}
             >
-              EN
+              QU
             </button>
           </div>
           <button className="memorial-page__share" onClick={onShare}>
@@ -208,13 +239,22 @@ export default function ClassicLightTemplate({
 
       {shareFeedback && <p className="memorial-page__toast">{p.shareCopied}</p>}
 
-      <div className="memorial-page__cover" />
-      <div className="memorial-page__avatar" />
+      <div
+        className="memorial-page__cover"
+        style={memorial.cover_photo_url ? { backgroundImage: `url(${memorial.cover_photo_url})` } : undefined}
+      />
+      <div className="memorial-page__avatar">
+        {memorial.avatar_url && (
+          <img src={memorial.avatar_url} alt={memorial.full_name} className="memorial-page__avatar-img" />
+        )}
+      </div>
 
       <h1 className="memorial-page__name">{memorial.full_name}</h1>
-      {memorial.occupation && <p className="memorial-page__occupation">{memorial.occupation}</p>}
+      {memorial.occupation && <p className="memorial-page__occupation">{loc(memorial, "occupation", lang)}</p>}
       {dateRange && <p className="memorial-page__dates">{dateRange}</p>}
-      {memorial.featured_quote && <p className="memorial-page__quote">“{memorial.featured_quote}”</p>}
+      {memorial.featured_quote && (
+        <p className="memorial-page__quote">“{loc(memorial, "featured_quote", lang)}”</p>
+      )}
       {memorial.quechua_phrase && <p className="memorial-page__quechua">{memorial.quechua_phrase}</p>}
       <p className="memorial-page__visits">
         👁 {memorial.visit_count ?? 0} {mp.visits}
@@ -233,6 +273,13 @@ export default function ClassicLightTemplate({
       </nav>
 
       <main className="memorial-page__body">{renderTab()}</main>
+
+      <PhotoLightbox
+        photos={localizedPhotos}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={(dir) => setLightboxIndex((i) => (i + dir + photos.length) % photos.length)}
+      />
     </div>
   );
 }

@@ -50,7 +50,7 @@ const PHOTO_ICON = (
 const TAB_IDS = ["bio", "timeline", "vela", "album", "video", "arbol", "condolencias"];
 
 export default function PhonePreview() {
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
   const p = t.preview;
   const [tab, setTab] = useState("bio");
   const [isPrivate, setIsPrivate] = useState(false);
@@ -66,7 +66,7 @@ export default function PhonePreview() {
       return;
     }
     const utter = new SpeechSynthesisUtterance(p.bio.join(" "));
-    utter.lang = lang === "en" ? "en-US" : "es-PE";
+    utter.lang = "es-PE";
     utter.onend = () => setSpeaking(false);
     utter.onerror = () => setSpeaking(false);
     window.speechSynthesis.cancel();
