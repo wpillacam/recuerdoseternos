@@ -22,11 +22,16 @@ create table if not exists memorials (
   death_date date,
   quechua_phrase text,
   biography text,
+  biography_qu text,
+  featured_quote_qu text,
+  occupation_qu text,
   avatar_url text,
   is_public boolean not null default true,
   visit_count integer not null default 0,
   candle_count integer not null default 0,
   video_url text,
+  song_url text,
+  song_title text,
   created_at timestamptz not null default now()
 );
 
@@ -35,6 +40,7 @@ create table if not exists life_events (
   memorial_id uuid not null references memorials(id) on delete cascade,
   year_label text not null,
   description text not null,
+  description_qu text,
   sort_order integer not null default 0
 );
 
@@ -43,6 +49,7 @@ create table if not exists family_members (
   memorial_id uuid not null references memorials(id) on delete cascade,
   name text not null,
   relation text,
+  relation_qu text,
   sort_order integer not null default 0
 );
 
@@ -51,6 +58,7 @@ create table if not exists memorial_photos (
   memorial_id uuid not null references memorials(id) on delete cascade,
   url text not null,
   caption text,
+  caption_qu text,
   sort_order integer not null default 0,
   created_at timestamptz not null default now()
 );
@@ -62,6 +70,15 @@ create table if not exists condolences (
   message text not null,
   created_at timestamptz not null default now()
 );
+
+create table if not exists candle_lights (
+  id uuid primary key default gen_random_uuid(),
+  memorial_id uuid not null references memorials(id) on delete cascade,
+  created_at timestamptz not null default now()
+);
+
+create index if not exists candle_lights_memorial_id_idx on candle_lights(memorial_id);
+create index if not exists candle_lights_created_at_idx on candle_lights(created_at);
 
 -- ============================================================
 -- FUNCIONES (incrementos atomicos para visitantes anonimos)
@@ -82,6 +99,7 @@ language sql
 security definer
 set search_path = public
 as $$
+  insert into candle_lights (memorial_id) values (memorial_id_input);
   update memorials set candle_count = candle_count + 1 where id = memorial_id_input;
 $$;
 
@@ -95,6 +113,7 @@ alter table life_events enable row level security;
 alter table family_members enable row level security;
 alter table memorial_photos enable row level security;
 alter table condolences enable row level security;
+alter table candle_lights enable row level security;
 
 drop policy if exists public_read_memorials on memorials;
 create policy public_read_memorials on memorials for select using (true);
@@ -131,6 +150,14 @@ create policy owner_manages_photos on memorial_photos for all using (
 
 drop policy if exists anyone_adds_condolences on condolences;
 create policy anyone_adds_condolences on condolences for insert with check (true);
+
+drop policy if exists anyone_adds_candle_lights on candle_lights;
+create policy anyone_adds_candle_lights on candle_lights for insert with check (true);
+
+drop policy if exists owner_reads_candle_lights on candle_lights;
+create policy owner_reads_candle_lights on candle_lights for select using (
+  auth.uid() = (select owner_id from memorials where id = memorial_id)
+);
 
 drop policy if exists own_profile_select on profiles;
 create policy own_profile_select on profiles for select using (auth.uid() = id);
