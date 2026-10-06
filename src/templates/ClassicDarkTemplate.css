@@ -414,11 +414,15 @@
   filter: brightness(1.1);
 }
 
-.tpld-song-title {
-  font-style: italic;
-  color: var(--tpl-accent, #d4af37);
-  margin-bottom: 10px;
-  text-align: center;
+.tpld-audio-player {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 2px;
+  height: 2px;
+  opacity: 0.01;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .tpld-video {

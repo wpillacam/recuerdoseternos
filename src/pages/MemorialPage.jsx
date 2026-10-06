@@ -29,7 +29,6 @@ export default function MemorialPage() {
   const [condolences, setCondolences] = useState([]);
   const [tab, setTab] = useState("bio");
   const [lit, setLit] = useState(false);
-  const [speaking, setSpeaking] = useState(false);
   const [shareFeedback, setShareFeedback] = useState(false);
   const [condolenceForm, setCondolenceForm] = useState({ author_name: "", message: "" });
   const [condolenceSent, setCondolenceSent] = useState(false);
@@ -134,23 +133,6 @@ export default function MemorialPage() {
     setTimeout(() => setCondolenceSent(false), 2500);
   };
 
-  const handleListen = () => {
-    const bioText = lang === "qu" && memorial?.biography_qu ? memorial.biography_qu : memorial?.biography;
-    if (typeof window === "undefined" || !("speechSynthesis" in window) || !bioText) return;
-    if (speaking) {
-      window.speechSynthesis.cancel();
-      setSpeaking(false);
-      return;
-    }
-    const utter = new SpeechSynthesisUtterance(bioText);
-    utter.lang = "es-PE";
-    utter.onend = () => setSpeaking(false);
-    utter.onerror = () => setSpeaking(false);
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utter);
-    setSpeaking(true);
-  };
-
   const handleShare = async () => {
     const shareData = {
       title: memorial?.full_name || "Recuerdos Eternos",
@@ -230,14 +212,12 @@ export default function MemorialPage() {
       tab={tab}
       setTab={setTab}
       lit={lit}
-      speaking={speaking}
       shareFeedback={shareFeedback}
       condolenceForm={condolenceForm}
       setCondolenceForm={setCondolenceForm}
       condolenceSent={condolenceSent}
       onLightCandle={handleLightCandle}
       onCondolenceSubmit={handleCondolenceSubmit}
-      onListen={handleListen}
       onShare={handleShare}
       lang={lang}
       setLang={setLang}

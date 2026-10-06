@@ -285,11 +285,15 @@
   filter: brightness(1.05);
 }
 
-.mem-song-title {
-  font-style: italic;
-  color: var(--tpl-accent, #c6a664);
-  margin-bottom: 0.6rem;
-  text-align: center;
+.mem-audio-player {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 2px;
+  height: 2px;
+  opacity: 0.01;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .mem-video {

@@ -2,11 +2,11 @@ import { useState } from "react";
 import logoIcon from "../assets/logo-icon.png";
 import { formatDate } from "./dateUtils";
 import { loc } from "./localize";
-import { toYoutubeEmbed } from "./youtube";
+import { useYoutubeAudio } from "./useYoutubeAudio";
 import PhotoLightbox from "./PhotoLightbox";
 import "./ClassicDarkTemplate.css";
 
-const BASE_TABS = ["bio", "timeline", "vela", "album", "video", "cancion", "arbol", "condolencias"];
+const BASE_TABS = ["bio", "timeline", "vela", "album", "video", "arbol", "condolencias"];
 
 export default function ClassicDarkTemplate({
   memorial,
@@ -17,14 +17,12 @@ export default function ClassicDarkTemplate({
   tab,
   setTab,
   lit,
-  speaking,
   shareFeedback,
   condolenceForm,
   setCondolenceForm,
   condolenceSent,
   onLightCandle,
   onCondolenceSubmit,
-  onListen,
   onShare,
   lang,
   setLang,
@@ -33,10 +31,9 @@ export default function ClassicDarkTemplate({
   const p = t.preview;
   const mp = t.memorialPage;
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const { containerRef: audioRef, playing: audioPlaying, toggle: toggleAudio } = useYoutubeAudio(memorial.song_url);
 
-  const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url).filter(
-    (id) => id !== "cancion" || memorial.song_url
-  );
+  const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url);
   const dateRange = [formatDate(memorial.birth_date), formatDate(memorial.death_date)]
     .filter(Boolean)
     .join(" — ");
@@ -47,16 +44,16 @@ export default function ClassicDarkTemplate({
       case "bio":
         return (
           <div className="tpld-content">
-            {"speechSynthesis" in window && memorial.biography && (
-              <button className={`tpld-listen ${speaking ? "tpld-listen--active" : ""}`} onClick={onListen}>
+            {memorial.song_url && (
+              <button className={`tpld-listen ${audioPlaying ? "tpld-listen--active" : ""}`} onClick={toggleAudio}>
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                  {speaking ? (
+                  {audioPlaying ? (
                     <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
                   ) : (
                     <path d="M4 9v6h4l5 5V4L8 9H4Zm11.5 3a3.5 3.5 0 0 0-2-3.16v6.32A3.5 3.5 0 0 0 15.5 12Z" />
                   )}
                 </svg>
-                {speaking ? p.stopBio : p.listenBio}
+                {audioPlaying ? p.stopBio : p.listenBio}
               </button>
             )}
             <p>{loc(memorial, "biography", lang) || mp.noBio}</p>
@@ -122,22 +119,6 @@ export default function ClassicDarkTemplate({
           </div>
         ) : (
           <p className="tpld-empty">{mp.noVideo}</p>
-        );
-      case "cancion":
-        return memorial.song_url ? (
-          <div>
-            {memorial.song_title && <p className="tpld-song-title">{memorial.song_title}</p>}
-            <div className="tpld-video">
-              <iframe
-                src={toYoutubeEmbed(memorial.song_url)}
-                title="cancion"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            </div>
-          </div>
-        ) : (
-          <p className="tpld-empty">{mp.noSong}</p>
         );
       case "arbol":
         return members.length ? (
@@ -282,6 +263,8 @@ export default function ClassicDarkTemplate({
         onClose={() => setLightboxIndex(null)}
         onNavigate={(dir) => setLightboxIndex((i) => (i + dir + photos.length) % photos.length)}
       />
+
+      {memorial.song_url && <div ref={audioRef} className="tpld-audio-player" aria-hidden="true" />}
     </div>
   );
 }
