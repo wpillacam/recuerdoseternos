@@ -4,6 +4,17 @@ import { supabase } from "../lib/supabaseClient";
 import logoIcon from "../assets/logo-icon.png";
 import "./ContractAccept.css";
 
+const WHATSAPP_NUMBER = "51914772762";
+
+function buildAcceptWaUrl(contract) {
+  const text = encodeURIComponent(
+    `Hola, confirmo que acepté el contrato del memorial digital de ${
+      contract.homenajeado_nombre || contract.cliente_nombre
+    }. Mi nombre: ${contract.cliente_nombre}.`
+  );
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
+}
+
 function formatDate(value) {
   if (!value) return "";
   return new Date(value).toLocaleDateString("es-PE", {
@@ -39,10 +50,16 @@ export default function ContractAccept() {
 
   const handleAccept = async () => {
     setAccepting(true);
+    // Open a blank tab synchronously (still inside the click gesture) so mobile
+    // browsers don't block it once we navigate it to the wa.me link below.
+    const waWindow = window.open("", "_blank");
     const { data, error } = await supabase.rpc("accept_contract", { p_token: token });
     setAccepting(false);
     if (!error && data && data.length > 0) {
       setContract(data[0]);
+      if (waWindow) waWindow.location.href = buildAcceptWaUrl(data[0]);
+    } else if (waWindow) {
+      waWindow.close();
     }
   };
 
@@ -163,6 +180,14 @@ export default function ContractAccept() {
               Contrato aceptado el <strong>{formatDate(contract.fecha_aceptacion)}</strong>.
             </p>
             <p className="caccept-thanks">Gracias por confiar en Recuerdos Eternos.</p>
+            <a
+              className="btn btn-whatsapp caccept-btn"
+              href={buildAcceptWaUrl(contract)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Avisar por WhatsApp
+            </a>
           </div>
         ) : (
           <button className="btn btn-gold caccept-btn" onClick={handleAccept} disabled={accepting}>
