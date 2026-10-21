@@ -1,0 +1,221 @@
+.caccept-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-soft);
+  font-family: var(--font-serif);
+}
+
+.caccept-page {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+  background: var(--color-bone);
+  padding: 0 0 60px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.caccept-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .caccept-page {
+    padding: 40px 16px 80px;
+  }
+  .caccept-card {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+  }
+}
+
+.caccept-header {
+  background: linear-gradient(165deg, var(--color-oxford) 0%, var(--color-deep-blue) 100%);
+  padding: 28px 18px 24px;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.caccept-logo {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  margin: 0 auto 10px;
+}
+
+.caccept-card h1 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--color-gold-soft);
+  letter-spacing: 0;
+  line-height: 1.4;
+  max-width: 100%;
+}
+
+.caccept-h1-sub {
+  display: inline-block;
+  margin-top: 2px;
+  font-size: 0.82rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.78);
+  letter-spacing: 0.04em;
+}
+
+.caccept-sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.75);
+  margin-top: 4px;
+  font-size: 0.9rem;
+}
+
+.caccept-body {
+  padding: 26px 22px 30px;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+
+.caccept-body * {
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.caccept-section {
+  text-align: left;
+  background: var(--color-bone);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  overflow-wrap: anywhere;
+}
+
+.caccept-section h2 {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  margin-bottom: 12px;
+}
+
+.caccept-section dl {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.caccept-section dl > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.caccept-section dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-soft);
+}
+
+.caccept-section dd {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--color-oxford);
+  word-break: break-word;
+}
+
+.caccept-price-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  background: var(--color-oxford);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-top: 4px;
+}
+
+.caccept-price-box .label {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.caccept-price {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--color-gold-soft);
+}
+
+.caccept-service-desc {
+  text-align: left;
+  font-size: 0.85rem;
+  color: var(--color-text-soft);
+  margin-bottom: 14px;
+  line-height: 1.55;
+}
+
+.caccept-declaration {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--color-text-soft);
+  text-align: center;
+  padding: 0 4px;
+}
+
+.caccept-btn {
+  margin-top: 18px;
+  width: 100%;
+  font-size: 1rem;
+  padding: 14px;
+}
+
+.caccept-done {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.caccept-check {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #2c7a4b;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  margin: 0 auto 12px;
+}
+
+.caccept-thanks {
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+.caccept-footer {
+  margin-top: 24px;
+  padding-top: 14px;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.72rem;
+  color: var(--color-text-soft);
+  text-align: center;
+}

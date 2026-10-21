@@ -10,6 +10,8 @@ import AdminPanel from "./pages/AdminPanel";
 import AdminClients from "./pages/AdminClients";
 import AdminMemorialEdit from "./pages/AdminMemorialEdit";
 import AdminReports from "./pages/AdminReports";
+import ContractForm from "./pages/ContractForm";
+import ContractAccept from "./pages/ContractAccept";
 import MemorialPage from "./pages/MemorialPage";
 
 function App() {
@@ -60,6 +62,8 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/contrato/nuevo" element={<ContractForm />} />
+            <Route path="/contrato/:token" element={<ContractAccept />} />
             <Route path="/:uuid" element={<MemorialPage />} />
           </Routes>
         </BrowserRouter>

@@ -207,6 +207,102 @@ create policy authenticated_delete_memorial_media on storage.objects
   for delete using (bucket_id = 'memorial-media' and auth.role() = 'authenticated');
 
 -- ============================================================
+-- CONTRATOS DIGITALES (cero papel)
+-- ============================================================
+
+create table if not exists contracts (
+  id uuid primary key default gen_random_uuid(),
+  created_at timestamptz not null default now(),
+  token text not null unique default replace(gen_random_uuid()::text, '-', ''),
+  vendedor_nombre text,
+  cliente_nombre text not null,
+  cliente_dni text,
+  cliente_whatsapp text,
+  cliente_correo text,
+  cliente_direccion text,
+  homenajeado_nombre text,
+  relacion_cliente text,
+  zona text,
+  plantilla text,
+  precio numeric,
+  forma_pago text,
+  estado text not null default 'Pendiente',
+  fecha_aceptacion timestamptz
+);
+
+create index if not exists contracts_token_idx on contracts(token);
+
+alter table contracts enable row level security;
+
+drop policy if exists anyone_creates_contracts on contracts;
+create policy anyone_creates_contracts on contracts for insert with check (true);
+
+-- Sin politica de select/update: toda lectura y aceptacion pasa por las
+-- funciones de abajo, que exigen el token exacto del contrato.
+
+create or replace function get_contract_by_token(p_token text)
+returns table (
+  id uuid, created_at timestamptz, vendedor_nombre text, cliente_nombre text,
+  cliente_dni text, cliente_whatsapp text, cliente_correo text, cliente_direccion text,
+  homenajeado_nombre text, relacion_cliente text, zona text, plantilla text,
+  precio numeric, forma_pago text, estado text, fecha_aceptacion timestamptz
+)
+language sql security definer set search_path = public
+as $$
+  select id, created_at, vendedor_nombre, cliente_nombre, cliente_dni, cliente_whatsapp,
+         cliente_correo, cliente_direccion, homenajeado_nombre, relacion_cliente, zona,
+         plantilla, precio, forma_pago, estado, fecha_aceptacion
+  from contracts where token = p_token;
+$$;
+
+create or replace function accept_contract(p_token text)
+returns table (
+  id uuid, created_at timestamptz, vendedor_nombre text, cliente_nombre text,
+  cliente_dni text, cliente_whatsapp text, cliente_correo text, cliente_direccion text,
+  homenajeado_nombre text, relacion_cliente text, zona text, plantilla text,
+  precio numeric, forma_pago text, estado text, fecha_aceptacion timestamptz
+)
+language plpgsql security definer set search_path = public
+as $$
+begin
+  update contracts
+  set estado = 'Aceptado', fecha_aceptacion = now()
+  where contracts.token = p_token and contracts.estado = 'Pendiente';
+  return query
+  select contracts.id, contracts.created_at, contracts.vendedor_nombre, contracts.cliente_nombre,
+         contracts.cliente_dni, contracts.cliente_whatsapp, contracts.cliente_correo,
+         contracts.cliente_direccion, contracts.homenajeado_nombre, contracts.relacion_cliente,
+         contracts.zona, contracts.plantilla, contracts.precio, contracts.forma_pago,
+         contracts.estado, contracts.fecha_aceptacion
+  from contracts where contracts.token = p_token;
+end;
+$$;
+
+create or replace function create_contract(
+  p_vendedor_nombre text, p_cliente_nombre text, p_cliente_dni text, p_cliente_whatsapp text,
+  p_cliente_correo text, p_cliente_direccion text, p_homenajeado_nombre text, p_relacion_cliente text,
+  p_zona text, p_plantilla text, p_precio numeric, p_forma_pago text
+)
+returns table (id uuid, token text)
+language plpgsql security definer set search_path = public
+as $$
+declare
+  new_id uuid;
+  new_token text;
+begin
+  insert into contracts (
+    vendedor_nombre, cliente_nombre, cliente_dni, cliente_whatsapp, cliente_correo,
+    cliente_direccion, homenajeado_nombre, relacion_cliente, zona, plantilla, precio, forma_pago
+  ) values (
+    p_vendedor_nombre, p_cliente_nombre, p_cliente_dni, p_cliente_whatsapp, p_cliente_correo,
+    p_cliente_direccion, p_homenajeado_nombre, p_relacion_cliente, p_zona, p_plantilla, p_precio, p_forma_pago
+  )
+  returning contracts.id, contracts.token into new_id, new_token;
+  return query select new_id, new_token;
+end;
+$$;
+
+-- ============================================================
 -- Despues de correr este script:
 -- 1. Crea tu usuario admin desde Authentication -> Users -> Add user.
 -- 2. Vuelve aqui y marca tu usuario como admin:

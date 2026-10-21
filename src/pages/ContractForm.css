@@ -1,0 +1,137 @@
+.cform-page {
+  min-height: 100vh;
+  background: var(--color-bone);
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px 80px;
+}
+
+.cform-card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+.cform-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  margin: 0 auto 4px;
+}
+
+.cform-card h1 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--color-oxford);
+  text-align: center;
+}
+
+.cform-sub {
+  text-align: center;
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.cform-section-title {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
+  border-top: 1px solid var(--color-border);
+  padding-top: 14px;
+  margin-top: 4px;
+}
+
+.cform-card label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-oxford);
+}
+
+.cform-card input,
+.cform-card select {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 13px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  background: var(--color-bone);
+  color: var(--color-text);
+}
+
+.cform-card input:focus,
+.cform-card select:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+.cform-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .cform-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cform-error {
+  color: #a3342b;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.cform-submit {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.cform-card--done {
+  align-items: center;
+  text-align: center;
+}
+
+.cform-link-box {
+  width: 100%;
+  background: var(--color-bone);
+  border: 1px dashed var(--color-gold-soft);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  color: var(--color-text-soft);
+  word-break: break-all;
+}
+
+.cform-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.cform-actions .btn {
+  flex: 1;
+}
+
+.cform-new {
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--color-gold-dark);
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
