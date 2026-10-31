@@ -264,7 +264,11 @@ export default function ClassicDarkTemplate({
         onNavigate={(dir) => setLightboxIndex((i) => (i + dir + photos.length) % photos.length)}
       />
 
-      {memorial.song_url && <div ref={audioRef} className="tpld-audio-player" aria-hidden="true" />}
+      {memorial.song_url && (
+        <div className="tpld-audio-player" aria-hidden="true">
+          <div ref={audioRef} />
+        </div>
+      )}
     </div>
   );
 }

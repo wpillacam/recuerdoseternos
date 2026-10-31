@@ -262,7 +262,11 @@ export default function ClassicLightTemplate({
         onNavigate={(dir) => setLightboxIndex((i) => (i + dir + photos.length) % photos.length)}
       />
 
-      {memorial.song_url && <div ref={audioRef} className="mem-audio-player" aria-hidden="true" />}
+      {memorial.song_url && (
+        <div className="mem-audio-player" aria-hidden="true">
+          <div ref={audioRef} />
+        </div>
+      )}
     </div>
   );
 }
