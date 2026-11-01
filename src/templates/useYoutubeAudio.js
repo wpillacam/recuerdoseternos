@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { getYoutubeId } from "./youtube";
+import { getYoutubeIds } from "./youtube";
 
 let apiPromise = null;
 function loadYoutubeApi() {
@@ -28,22 +28,27 @@ export function useYoutubeAudio(songUrl) {
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    const videoId = getYoutubeId(songUrl);
-    if (!videoId || !containerRef.current) return undefined;
+    const videoIds = getYoutubeIds(songUrl);
+    if (!videoIds.length || !containerRef.current) return undefined;
+    const [videoId, ...rest] = videoIds;
     let cancelled = false;
 
     loadYoutubeApi().then(() => {
       if (cancelled || !containerRef.current) return;
       playerRef.current = new window.YT.Player(containerRef.current, {
         videoId,
-        playerVars: { playsinline: 1, controls: 0 },
+        playerVars: {
+          playsinline: 1,
+          controls: 0,
+          ...(rest.length ? { playlist: rest.join(","), loop: 1 } : {}),
+        },
         events: {
           onReady: (e) => e.target.playVideo(),
           onStateChange: (e) => {
             const YT = window.YT;
             if (e.data === YT.PlayerState.PLAYING) setPlaying(true);
             else if (e.data === YT.PlayerState.PAUSED) setPlaying(false);
-            else if (e.data === YT.PlayerState.ENDED) {
+            else if (e.data === YT.PlayerState.ENDED && !rest.length) {
               e.target.seekTo(0);
               e.target.playVideo();
             }

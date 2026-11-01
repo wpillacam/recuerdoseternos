@@ -17,3 +17,13 @@ export function getYoutubeId(url) {
   }
   return "";
 }
+
+// Igual que getYoutubeId, pero acepta varios enlaces separados por coma
+// (para memoriales con mas de una cancion de fondo).
+export function getYoutubeIds(urls) {
+  if (!urls) return [];
+  return urls
+    .split(",")
+    .map((u) => getYoutubeId(u.trim()))
+    .filter(Boolean);
+}
