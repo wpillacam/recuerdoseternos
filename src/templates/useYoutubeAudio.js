@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { getYoutubeIds } from "./youtube";
+import { parseSongs } from "./youtube";
 
 let apiPromise = null;
 function loadYoutubeApi() {
@@ -18,37 +18,40 @@ function loadYoutubeApi() {
   return apiPromise;
 }
 
-// Reproduce la cancion del memorial en segundo plano mientras el visitante
-// navega por la pagina. Intenta reproducirse sola al cargar (funciona en
-// algunos navegadores); si el navegador bloquea el autoplay con sonido, el
-// visitante puede activarla manualmente con el boton "Escuchar audio".
-export function useYoutubeAudio(songUrl) {
+// Reproduce la(s) cancion(es) del memorial en segundo plano mientras el
+// visitante navega por la pagina. La primera intenta reproducirse sola al
+// cargar (funciona en algunos navegadores); si el navegador bloquea el
+// autoplay con sonido, o para cambiar de cancion, el visitante usa los
+// botones con el nombre de cada una.
+export function useYoutubeAudio(songUrl, songTitle) {
   const containerRef = useRef(null);
   const playerRef = useRef(null);
+  const readyRef = useRef(false);
   const [playing, setPlaying] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const songs = parseSongs(songUrl, songTitle);
 
   useEffect(() => {
-    const videoIds = getYoutubeIds(songUrl);
-    if (!videoIds.length || !containerRef.current) return undefined;
-    const [videoId, ...rest] = videoIds;
+    if (!songs.length || !containerRef.current) return undefined;
     let cancelled = false;
+    setCurrentIndex(0);
 
     loadYoutubeApi().then(() => {
       if (cancelled || !containerRef.current) return;
       playerRef.current = new window.YT.Player(containerRef.current, {
-        videoId,
-        playerVars: {
-          playsinline: 1,
-          controls: 0,
-          ...(rest.length ? { playlist: rest.join(","), loop: 1 } : {}),
-        },
+        videoId: songs[0].id,
+        playerVars: { playsinline: 1, controls: 0 },
         events: {
-          onReady: (e) => e.target.playVideo(),
+          onReady: (e) => {
+            readyRef.current = true;
+            e.target.playVideo();
+          },
           onStateChange: (e) => {
             const YT = window.YT;
             if (e.data === YT.PlayerState.PLAYING) setPlaying(true);
             else if (e.data === YT.PlayerState.PAUSED) setPlaying(false);
-            else if (e.data === YT.PlayerState.ENDED && !rest.length) {
+            else if (e.data === YT.PlayerState.ENDED) {
               e.target.seekTo(0);
               e.target.playVideo();
             }
@@ -59,17 +62,24 @@ export function useYoutubeAudio(songUrl) {
 
     return () => {
       cancelled = true;
+      readyRef.current = false;
       playerRef.current?.destroy?.();
       playerRef.current = null;
     };
-  }, [songUrl]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [songUrl, songTitle]);
 
-  const toggle = () => {
+  const playSong = (index) => {
     const player = playerRef.current;
-    if (!player) return;
-    if (playing) player.pauseVideo();
-    else player.playVideo();
+    if (!player || !readyRef.current || !songs[index]) return;
+    if (index === currentIndex) {
+      if (playing) player.pauseVideo();
+      else player.playVideo();
+      return;
+    }
+    setCurrentIndex(index);
+    player.loadVideoById(songs[index].id);
   };
 
-  return { containerRef, playing, toggle };
+  return { containerRef, playing, currentIndex, songs, playSong };
 }

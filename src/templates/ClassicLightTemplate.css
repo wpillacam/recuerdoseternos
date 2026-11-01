@@ -190,6 +190,13 @@
   white-space: pre-wrap;
 }
 
+.mem-songs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
 .mem-listen {
   display: inline-flex;
   align-items: center;
@@ -200,7 +207,6 @@
   border-radius: 999px;
   font-size: 0.78rem;
   color: var(--color-oxford);
-  margin-bottom: 18px;
 }
 
 .mem-listen--active {

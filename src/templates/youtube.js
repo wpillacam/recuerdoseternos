@@ -27,3 +27,11 @@ export function getYoutubeIds(urls) {
     .map((u) => getYoutubeId(u.trim()))
     .filter(Boolean);
 }
+
+// Combina los enlaces (song_url) con sus nombres (song_title), ambos
+// separados por coma en el mismo orden, en una lista de canciones.
+export function parseSongs(songUrl, songTitle) {
+  const ids = getYoutubeIds(songUrl);
+  const titles = (songTitle || "").split(",").map((t) => t.trim());
+  return ids.map((id, i) => ({ id, title: titles[i] || `Canción ${i + 1}` }));
+}

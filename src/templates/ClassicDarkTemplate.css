@@ -236,6 +236,13 @@
   padding-bottom: 20px;
 }
 
+.tpld-songs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
 .tpld-listen {
   display: inline-flex;
   align-items: center;
@@ -246,7 +253,6 @@
   border-radius: 999px;
   font-size: 0.74rem;
   color: var(--tpl-accent, #d4af37);
-  margin-bottom: 16px;
 }
 
 .tpld-listen--active {

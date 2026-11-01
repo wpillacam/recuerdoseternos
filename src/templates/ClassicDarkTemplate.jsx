@@ -31,7 +31,13 @@ export default function ClassicDarkTemplate({
   const p = t.preview;
   const mp = t.memorialPage;
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const { containerRef: audioRef, playing: audioPlaying, toggle: toggleAudio } = useYoutubeAudio(memorial.song_url);
+  const {
+    containerRef: audioRef,
+    playing: audioPlaying,
+    currentIndex: audioIndex,
+    songs,
+    playSong,
+  } = useYoutubeAudio(memorial.song_url, memorial.song_title);
 
   const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url).filter(
     (id) => id !== "timeline" || events.length > 0
@@ -46,17 +52,28 @@ export default function ClassicDarkTemplate({
       case "bio":
         return (
           <div className="tpld-content">
-            {memorial.song_url && (
-              <button className={`tpld-listen ${audioPlaying ? "tpld-listen--active" : ""}`} onClick={toggleAudio}>
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
-                  {audioPlaying ? (
-                    <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-                  ) : (
-                    <path d="M4 9v6h4l5 5V4L8 9H4Zm11.5 3a3.5 3.5 0 0 0-2-3.16v6.32A3.5 3.5 0 0 0 15.5 12Z" />
-                  )}
-                </svg>
-                {audioPlaying ? p.stopBio : p.listenBio}
-              </button>
+            {songs.length > 0 && (
+              <div className="tpld-songs">
+                {songs.map((song, i) => {
+                  const isActive = i === audioIndex && audioPlaying;
+                  return (
+                    <button
+                      key={song.id}
+                      className={`tpld-listen ${isActive ? "tpld-listen--active" : ""}`}
+                      onClick={() => playSong(i)}
+                    >
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                        {isActive ? (
+                          <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
+                        ) : (
+                          <path d="M4 9v6h4l5 5V4L8 9H4Zm11.5 3a3.5 3.5 0 0 0-2-3.16v6.32A3.5 3.5 0 0 0 15.5 12Z" />
+                        )}
+                      </svg>
+                      {song.title}
+                    </button>
+                  );
+                })}
+              </div>
             )}
             <p>{loc(memorial, "biography", lang) || mp.noBio}</p>
           </div>
