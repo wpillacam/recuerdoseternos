@@ -33,7 +33,9 @@ export default function ClassicDarkTemplate({
   const [lightboxIndex, setLightboxIndex] = useState(null);
   const { containerRef: audioRef, playing: audioPlaying, toggle: toggleAudio } = useYoutubeAudio(memorial.song_url);
 
-  const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url);
+  const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url).filter(
+    (id) => id !== "timeline" || events.length > 0
+  );
   const dateRange = [formatDate(memorial.birth_date), formatDate(memorial.death_date)]
     .filter(Boolean)
     .join(" — ");
