@@ -137,7 +137,7 @@ export default function MemorialPage() {
         setStatus("ready");
         if (!visitedRef.current) {
           visitedRef.current = true;
-          supabase.rpc("increment_visit", { memorial_id_input: uuid });
+          supabase.rpc("increment_visit", { memorial_id_input: uuid }).then(() => {});
         }
         return;
       }
@@ -163,7 +163,7 @@ export default function MemorialPage() {
 
       if (!visitedRef.current) {
         visitedRef.current = true;
-        supabase.rpc("increment_visit", { memorial_id_input: uuid });
+        supabase.rpc("increment_visit", { memorial_id_input: uuid }).then(() => {});
       }
     }
 
