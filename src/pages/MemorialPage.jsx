@@ -8,12 +8,69 @@ import "./MemorialPage.css";
 
 const WHATSAPP_NUMBER = "51914772762";
 
+// Memorial privado a pedido de la familia: requiere un PIN de 4 dígitos.
+const PRIVATE_MEMORIALS = {
+  "81868d6c-2185-402b-94c2-0875a463b96e": "2720",
+};
+
 function todayKey() {
   return new Date().toISOString().slice(0, 10);
 }
 
 function candleStorageKey(uuid) {
   return `re_candle_${uuid}`;
+}
+
+function pinStorageKey(uuid) {
+  return `re_pin_ok_${uuid}`;
+}
+
+function PinGate({ uuid, onUnlock }) {
+  const [value, setValue] = useState("");
+  const [error, setError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (value === PRIVATE_MEMORIALS[uuid]) {
+      try {
+        localStorage.setItem(pinStorageKey(uuid), "ok");
+      } catch {
+        // localStorage puede fallar en modo privado; no es crítico.
+      }
+      onUnlock();
+    } else {
+      setError(true);
+      setValue("");
+    }
+  };
+
+  return (
+    <div className="memorial-pingate">
+      <img src={logoIcon} alt="" className="memorial-pingate__logo" />
+      <h1>Memorial privado</h1>
+      <p>Esta página está protegida. Ingresa la clave de 4 dígitos que te compartió la familia.</p>
+      <form onSubmit={handleSubmit} className="memorial-pingate__form">
+        <input
+          type="password"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          maxLength={4}
+          autoFocus
+          value={value}
+          onChange={(e) => {
+            setError(false);
+            setValue(e.target.value.replace(/\D/g, "").slice(0, 4));
+          }}
+          placeholder="••••"
+          className="memorial-pingate__input"
+        />
+        <button type="submit" className="btn btn-gold" disabled={value.length !== 4}>
+          Ingresar
+        </button>
+      </form>
+      {error && <p className="memorial-pingate__error">Clave incorrecta, intenta de nuevo.</p>}
+    </div>
+  );
 }
 
 export default function MemorialPage() {
@@ -32,7 +89,20 @@ export default function MemorialPage() {
   const [shareFeedback, setShareFeedback] = useState(false);
   const [condolenceForm, setCondolenceForm] = useState({ author_name: "", message: "" });
   const [condolenceSent, setCondolenceSent] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
   const visitedRef = useRef(false);
+
+  useEffect(() => {
+    if (!PRIVATE_MEMORIALS[uuid]) {
+      setUnlocked(true);
+      return;
+    }
+    try {
+      setUnlocked(localStorage.getItem(pinStorageKey(uuid)) === "ok");
+    } catch {
+      setUnlocked(false);
+    }
+  }, [uuid]);
 
   useEffect(() => {
     let active = true;
@@ -187,6 +257,10 @@ export default function MemorialPage() {
         </a>
       </div>
     );
+  }
+
+  if (PRIVATE_MEMORIALS[uuid] && !unlocked) {
+    return <PinGate uuid={uuid} onUnlock={() => setUnlocked(true)} />;
   }
 
   if (memorial.template_id === "custom" && memorial.custom_html) {

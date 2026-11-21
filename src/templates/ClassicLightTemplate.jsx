@@ -4,9 +4,14 @@ import { formatDate } from "./dateUtils";
 import { loc } from "./localize";
 import { useYoutubeAudio } from "./useYoutubeAudio";
 import PhotoLightbox from "./PhotoLightbox";
+import JorgeFamilyTree from "./JorgeFamilyTree";
+import JorgeGallery from "./JorgeGallery";
 import "./ClassicLightTemplate.css";
 
 const BASE_TABS = ["bio", "timeline", "vela", "album", "video", "arbol", "condolencias"];
+
+// Árbol genealógico interactivo a medida, exclusivo de este memorial.
+const CUSTOM_TREE_MEMORIAL_ID = "81868d6c-2185-402b-94c2-0875a463b96e";
 
 export default function ClassicLightTemplate({
   memorial,
@@ -110,6 +115,9 @@ export default function ClassicLightTemplate({
           </div>
         );
       case "album":
+        if (memorial.id === CUSTOM_TREE_MEMORIAL_ID) {
+          return <JorgeGallery />;
+        }
         return localizedPhotos.length ? (
           <div className="mem-grid">
             {localizedPhotos.map((photo, i) => (
@@ -128,6 +136,19 @@ export default function ClassicLightTemplate({
           <p className="mem-empty">{mp.noPhotos}</p>
         );
       case "video":
+        if (memorial.id === CUSTOM_TREE_MEMORIAL_ID && memorial.video_url) {
+          return (
+            <div className="mem-video">
+              <video
+                src={memorial.video_url}
+                poster="https://zqdfxiuqkuoblzozgqrk.supabase.co/storage/v1/object/public/memorial-media/jorge-penado-siancas/invitacion_misa.jpg"
+                controls
+                playsInline
+                style={{ width: "100%", height: "100%", objectFit: "contain", background: "#000" }}
+              />
+            </div>
+          );
+        }
         return memorial.video_url ? (
           <div className="mem-video">
             <iframe
@@ -141,6 +162,9 @@ export default function ClassicLightTemplate({
           <p className="mem-empty">{mp.noVideo}</p>
         );
       case "arbol":
+        if (memorial.id === CUSTOM_TREE_MEMORIAL_ID) {
+          return <JorgeFamilyTree />;
+        }
         return members.length ? (
           <div className="mem-tree">
             <div className="mem-tree__node mem-tree__node--main">{memorial.full_name}</div>
@@ -253,6 +277,11 @@ export default function ClassicLightTemplate({
         <p className="memorial-page__quote">“{loc(memorial, "featured_quote", lang)}”</p>
       )}
       {memorial.quechua_phrase && <p className="memorial-page__quechua">{memorial.quechua_phrase}</p>}
+      {memorial.id === CUSTOM_TREE_MEMORIAL_ID && (
+        <p className="memorial-page__dedication">
+          ♥ Un homenaje preparado con amor por su hija Marisol Penado Arroyo
+        </p>
+      )}
       <p className="memorial-page__visits">
         👁 {memorial.visit_count ?? 0} {mp.visits}
       </p>

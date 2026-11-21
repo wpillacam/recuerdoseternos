@@ -137,6 +137,15 @@
   padding: 0 24px;
 }
 
+.memorial-page__dedication {
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--tpl-accent, var(--color-gold-dark));
+  margin-top: 8px;
+  padding: 0 24px;
+}
+
 .memorial-page__visits {
   text-align: center;
   font-size: 0.78rem;

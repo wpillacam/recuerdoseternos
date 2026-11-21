@@ -66,3 +66,55 @@
   height: 100%;
   border: none;
 }
+
+.memorial-pingate {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(160deg, #fbf8f1, #f2e9d6);
+}
+
+.memorial-pingate__logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.memorial-pingate h1 {
+  font-size: 1.5rem;
+  color: var(--color-oxford);
+}
+
+.memorial-pingate p {
+  color: var(--color-text-soft);
+  max-width: 360px;
+}
+
+.memorial-pingate__form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.memorial-pingate__input {
+  width: 110px;
+  padding: 12px 16px;
+  font-size: 1.4rem;
+  letter-spacing: 0.5em;
+  text-align: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+}
+
+.memorial-pingate__error {
+  color: #b3261e;
+  font-size: 0.85rem;
+}

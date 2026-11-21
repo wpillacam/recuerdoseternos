@@ -1,0 +1,18 @@
+.jft-frame {
+  width: 100%;
+  margin: 0 -20px;
+}
+
+.jft-frame__iframe {
+  width: 100%;
+  height: 1400px;
+  border: none;
+  display: block;
+  background: #faf6ee;
+}
+
+@media (max-width: 640px) {
+  .jft-frame__iframe {
+    height: 1700px;
+  }
+}

@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Familia Penado Siancas — Legado y Genealogía</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        ivory: { 50: '#FDFBF7', 100: '#FAF6EE', 200: '#F3EBDD', 300: '#E8DAC3' },
+                        gold: { 300: '#E5C77F', 400: '#D4AF37', 500: '#B89028', 600: '#96721B', 700: '#735613' },
+                        slatepro: { 700: '#2A3B4C', 800: '#1D2B3A', 900: '#131D28' }
+                    },
+                    boxShadow: {
+                        'elegant': '0 10px 30px -5px rgba(29, 43, 58, 0.08), 0 4px 12px -3px rgba(184, 144, 40, 0.08)',
+                        'gold-glow': '0 0 25px rgba(212, 175, 55, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FAF6EE;
+            background-image:
+                radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(29, 43, 58, 0.06) 0px, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(212, 175, 55, 0.07) 0px, transparent 50%);
+            color: #1D2B3A;
+            overflow-x: hidden;
+        }
+        .paper-card {
+            background: rgba(253, 251, 247, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        .paper-card:hover { transform: translateY(-3px); border-color: #D4AF37; box-shadow: 0 14px 28px -6px rgba(29, 43, 58, 0.12), 0 4px 12px -2px rgba(212, 175, 55, 0.2); }
+        .patriarch-card {
+            background: linear-gradient(145deg, #1D2B3A 0%, #131D28 100%);
+            border: 1.5px solid #D4AF37;
+            box-shadow: 0 18px 36px -8px rgba(19, 29, 40, 0.35), 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+        .patriarch-card:hover { transform: translateY(-4px); box-shadow: 0 22px 42px -8px rgba(19, 29, 40, 0.45), 0 0 28px rgba(212, 175, 55, 0.35); }
+        .highlight-match { box-shadow: 0 0 0 3px #D4AF37, 0 12px 28px rgba(212, 175, 55, 0.35) !important; transform: scale(1.03); }
+        .dimmed-card { opacity: 0.35; filter: grayscale(40%); }
+        .tree-viewport::-webkit-scrollbar { height: 8px; width: 8px; }
+        .tree-viewport::-webkit-scrollbar-track { background: #F3EBDD; border-radius: 9999px; }
+        .tree-viewport::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 9999px; }
+        .tree-viewport::-webkit-scrollbar-thumb:hover { background: #B89028; }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.96) translateY(8px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .animate-branch { animation: fadeInScale 0.35s ease-out forwards; }
+        .gold-divider { height: 1px; background: linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%); }
+        .ribbon-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 16px; height: 16px; border-radius: 50%;
+            background: #8A8FA3; color: #fff; font-size: 10px; line-height: 1;
+        }
+        .author-badge {
+            display: inline-flex; align-items: center; gap: 3px;
+            padding: 1px 7px; border-radius: 9999px;
+            background: rgba(212, 175, 55, 0.18); border: 1px solid rgba(212, 175, 55, 0.6);
+            color: #96721B; font-size: 9px; font-weight: 700; letter-spacing: 0.02em;
+            white-space: nowrap; vertical-align: middle;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col selection:bg-gold-400 selection:text-white">
+
+    <header class="relative bg-slatepro-900 text-ivory-50 border-b-2 border-gold-400/70 shadow-xl overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(#D4AF37 1px, transparent 1px); background-size: 24px 24px;"></div>
+        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-gold-400/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-gold-400/10 blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-9 relative z-10">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div class="text-center lg:text-left space-y-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-400/15 border border-gold-400/40 text-gold-300 text-xs font-medium tracking-widest uppercase">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                        <span>Legado Familiar &amp; Memoria Eterna</span>
+                    </div>
+                    <h1 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white">
+                        Familia <span class="text-gold-300 italic">Penado Siancas</span>
+                    </h1>
+                    <p class="text-ivory-200/80 text-sm sm:text-base max-w-2xl mx-auto lg:mx-0 font-light">
+                        “Honor y gloria hasta la eternidad... Tu nobleza y humildad son la esencia de nuestras vidas.”
+                    </p>
+                    <p class="text-gold-300/90 text-xs sm:text-sm max-w-2xl mx-auto lg:mx-0 font-medium flex items-center justify-center lg:justify-start gap-1.5">
+                        <span>&#9829;</span>
+                        <span>Un homenaje preparado con amor por su hija Marisol Penado Arroyo</span>
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5 max-w-xl mx-auto lg:mx-0">
+                    <div class="bg-slatepro-800/80 border border-gold-400/30 rounded-xl px-3.5 py-2.5 text-center backdrop-blur-sm">
+                        <span class="block font-serif text-2xl sm:text-3xl font-bold text-gold-300">4</span>
+                        <span class="text-[11px] uppercase tracking-wider text-ivory-200/75">Generaciones</span>
+                    </div>
+                    <div class="bg-slatepro-800/80 border border-gold-400/30 rounded-xl px-3.5 py-2.5 text-center backdrop-blur-sm">
+                        <span class="block font-serif text-2xl sm:text-3xl font-bold text-white">4</span>
+                        <span class="text-[11px] uppercase tracking-wider text-ivory-200/75">Abuelos</span>
+                    </div>
+                    <div class="bg-slatepro-800/80 border border-gold-400/30 rounded-xl px-3.5 py-2.5 text-center backdrop-blur-sm">
+                        <span class="block font-serif text-2xl sm:text-3xl font-bold text-white">8</span>
+                        <span class="text-[11px] uppercase tracking-wider text-ivory-200/75">Hijos</span>
+                    </div>
+                    <div class="bg-slatepro-800/80 border border-gold-400/30 rounded-xl px-3.5 py-2.5 text-center backdrop-blur-sm">
+                        <span class="block font-serif text-2xl sm:text-3xl font-bold text-gold-300">10</span>
+                        <span class="text-[11px] uppercase tracking-wider text-ivory-200/75">Nietos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="sticky top-0 z-30 bg-ivory-50/95 backdrop-blur-md border-b border-gold-400/30 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+            <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+
+                <div class="relative flex-1 max-w-md">
+                    <i data-lucide="search" class="w-4 h-4 text-gold-600 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar a cualquier familiar..."
+                        class="w-full pl-10 pr-9 py-2 bg-white border border-gold-400/40 rounded-xl text-sm text-slatepro-900 placeholder-slatepro-700/50 focus:outline-none focus:border-gold-500 focus:ring-2 focus:ring-gold-400/20 transition">
+                    <button id="clearSearchBtn" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slatepro-700/50 hover:text-slatepro-900 p-1" title="Limpiar búsqueda">
+                        <i data-lucide="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 no-scrollbar" id="generationFilters">
+                    <button data-filter="all" class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-slatepro-800 text-gold-300 border border-slatepro-800 whitespace-nowrap transition">Todos (27)</button>
+                    <button data-filter="grandparents" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slatepro-800 border border-gold-400/30 hover:border-gold-500 whitespace-nowrap transition">Abuelos (4)</button>
+                    <button data-filter="couple" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slatepro-800 border border-gold-400/30 hover:border-gold-500 whitespace-nowrap transition">Jorge y Natividad (2)</button>
+                    <button data-filter="children" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slatepro-800 border border-gold-400/30 hover:border-gold-500 whitespace-nowrap transition">Hijos (8)</button>
+                    <button data-filter="descendant" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slatepro-800 border border-gold-400/30 hover:border-gold-500 whitespace-nowrap transition">Nietos y familia (13)</button>
+                </div>
+
+                <div class="flex items-center justify-between md:justify-end gap-2">
+                    <div class="inline-flex rounded-xl bg-ivory-200/80 p-1 border border-gold-400/30">
+                        <button id="viewTreeBtn" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-white text-slatepro-900 shadow-sm transition" title="Vista de Árbol Genealógico">
+                            <i data-lucide="network" class="w-3.5 h-3.5 text-gold-600"></i>
+                            <span class="hidden sm:inline">Árbol</span>
+                        </button>
+                        <button id="viewDirectoryBtn" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slatepro-700 hover:text-slatepro-900 transition" title="Vista Explorador por Ramas">
+                            <i data-lucide="list-tree" class="w-3.5 h-3.5 text-gold-600"></i>
+                            <span class="hidden sm:inline">Ramas</span>
+                        </button>
+                    </div>
+
+                    <button id="toggleAllBranchesBtn" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white border border-gold-400/40 hover:border-gold-500 text-xs font-medium text-slatepro-800 transition" title="Expandir o colapsar las ramas">
+                        <i data-lucide="chevrons-down-up" class="w-3.5 h-3.5 text-gold-600"></i>
+                        <span id="toggleAllText">Expandir ramas</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-1 relative">
+
+        <div id="treeViewContainer" class="relative w-full">
+            <div class="hidden md:flex items-center gap-1.5 fixed bottom-6 right-6 z-20 bg-white/95 backdrop-blur-md border border-gold-400/40 p-1.5 rounded-2xl shadow-elegant">
+                <button id="zoomOutBtn" class="p-2 rounded-xl hover:bg-ivory-100 text-slatepro-800 transition" title="Alejar"><i data-lucide="zoom-out" class="w-4 h-4"></i></button>
+                <span id="zoomLevelText" class="text-xs font-semibold text-slatepro-800 px-2 min-w-[3.2rem] text-center">100%</span>
+                <button id="zoomInBtn" class="p-2 rounded-xl hover:bg-ivory-100 text-slatepro-800 transition" title="Acercar"><i data-lucide="zoom-in" class="w-4 h-4"></i></button>
+                <div class="w-px h-5 bg-gold-400/30 mx-0.5"></div>
+                <button id="zoomResetBtn" class="px-2.5 py-1.5 rounded-xl hover:bg-ivory-100 text-xs font-medium text-gold-700 transition" title="Ajustar vista">Centrar</button>
+            </div>
+
+            <div id="treeViewport" class="tree-viewport w-full overflow-x-auto py-8 px-4 sm:px-8">
+                <div id="treeCanvas" class="relative mx-auto transition-transform duration-200 origin-top" style="min-width: 1180px; max-width: 1560px;">
+
+                    <svg id="treeSvgLines" class="absolute inset-0 w-full h-full pointer-events-none z-0"></svg>
+
+                    <div class="relative z-10 flex flex-col items-center mb-14" data-gen-group="grandparents">
+                        <div class="mb-3 inline-flex items-center gap-2 px-3 py-0.5 rounded-full bg-ivory-200/80 border border-gold-400/30 text-[11px] font-semibold uppercase tracking-widest text-gold-700">
+                            <span>Generación I • Abuelos</span>
+                        </div>
+                        <div id="parentsRow" class="flex items-start justify-center gap-10 sm:gap-20 flex-wrap">
+                            <!-- Renderizado dinámicamente -->
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 flex flex-col items-center mb-16" data-gen-group="couple">
+                        <div class="mb-3 inline-flex items-center gap-2 px-3.5 py-0.5 rounded-full bg-slatepro-800 text-gold-300 border border-gold-400/50 text-[11px] font-semibold uppercase tracking-widest shadow-sm">
+                            <i data-lucide="award" class="w-3 h-3"></i>
+                            <span>Generación II • Jorge y Natividad</span>
+                        </div>
+                        <div id="patriarchRow" class="flex justify-center items-center gap-3 sm:gap-5 flex-wrap">
+                            <!-- Renderizado dinámicamente -->
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 flex flex-col items-center">
+                        <div class="mb-5 inline-flex items-center gap-2 px-3.5 py-0.5 rounded-full bg-ivory-200/80 border border-gold-400/30 text-[11px] font-semibold uppercase tracking-widest text-gold-700">
+                            <span>Generación III &amp; IV • 8 Hijos y su descendencia</span>
+                        </div>
+
+                        <div id="childrenGrid" class="w-full grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 lg:gap-4 items-start">
+                            <!-- Renderizado dinámicamente -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="directoryViewContainer" class="hidden max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+            <!-- Renderizado dinámicamente -->
+        </div>
+
+        <div id="emptySearchState" class="hidden max-w-md mx-auto text-center py-16 px-4">
+            <div class="w-14 h-14 rounded-2xl bg-ivory-200 border border-gold-400/40 flex items-center justify-center mx-auto mb-4 text-gold-600">
+                <i data-lucide="search-x" class="w-7 h-7"></i>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-slatepro-900 mb-1">No se encontraron familiares</h3>
+            <p class="text-sm text-slatepro-700/80 mb-4">Intenta buscar con otro nombre o limpia los filtros activos.</p>
+            <button id="resetSearchEmptyBtn" class="px-4 py-2 rounded-xl bg-slatepro-800 text-gold-300 text-xs font-semibold hover:bg-slatepro-900 transition">Mostrar toda la familia</button>
+        </div>
+
+    </main>
+
+    <footer class="bg-slatepro-900 text-ivory-200/80 border-t border-gold-400/30 py-6 px-4 mt-12">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div class="flex items-center gap-2.5">
+                <span class="w-2 h-2 rounded-full bg-gold-400"></span>
+                <span class="font-serif text-base text-gold-300 font-semibold">Jorge Penado Siancas &amp; Natividad Arroyo Torres</span>
+            </div>
+            <p class="text-center sm:text-right text-ivory-200/60">
+                Árbol Genealógico Interactivo • 4 Abuelos, 8 Hijos y su descendencia • Ayacucho, Perú
+            </p>
+        </div>
+    </footer>
+
+    <div id="memberModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slatepro-900/70 backdrop-blur-sm transition-opacity">
+        <div class="bg-ivory-50 border-2 border-gold-400/60 rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden animate-branch relative">
+            <div class="bg-slatepro-900 px-6 py-5 text-white relative border-b border-gold-400/40">
+                <button id="closeModalBtn" class="absolute top-4 right-4 p-2 rounded-xl bg-white/10 hover:bg-white/20 text-ivory-100 transition" title="Cerrar"><i data-lucide="x" class="w-4 h-4"></i></button>
+                <div class="flex items-center gap-4">
+                    <div id="modalAvatar" class="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-400 to-gold-600 text-slatepro-900 font-serif font-bold text-2xl flex items-center justify-center shadow-lg border border-gold-300 shrink-0">JP</div>
+                    <div>
+                        <span id="modalBadge" class="inline-block px-2.5 py-0.5 rounded-full bg-gold-400/20 border border-gold-400/40 text-gold-300 text-[11px] font-semibold uppercase tracking-wider mb-1">Patriarca</span>
+                        <h2 id="modalName" class="font-serif text-2xl sm:text-3xl font-bold text-white leading-tight">Jorge Penado Siancas</h2>
+                        <p id="modalDates" class="text-xs text-ivory-200/80 mt-0.5 flex items-center gap-1.5">
+                            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-gold-400"></i>
+                            <span>Ayacucho, Perú</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalReadBody" class="p-6 space-y-5">
+                <div class="bg-white rounded-xl p-4 border border-gold-400/30 shadow-sm">
+                    <span class="text-[11px] font-semibold uppercase tracking-wider text-gold-700 block mb-1">Vínculo Familiar</span>
+                    <p id="modalRelation" class="text-sm font-medium text-slatepro-900">—</p>
+                </div>
+
+                <div>
+                    <span class="text-[11px] font-semibold uppercase tracking-wider text-gold-700 block mb-1.5">Semblanza</span>
+                    <p id="modalBio" class="text-sm text-slatepro-800/90 leading-relaxed italic font-serif text-lg bg-ivory-100/80 p-4 rounded-xl border-l-4 border-gold-400">—</p>
+                </div>
+
+                <div id="modalConnections" class="space-y-2">
+                    <span class="text-[11px] font-semibold uppercase tracking-wider text-gold-700 block">Conexiones Directas</span>
+                    <div id="modalConnectionsList" class="flex flex-wrap gap-2"></div>
+                </div>
+
+                <div class="pt-2 flex items-center justify-end border-t border-gold-400/20">
+                    <button id="closeModalFooterBtn" class="px-4 py-2 rounded-xl bg-slatepro-800 text-white text-xs font-semibold hover:bg-slatepro-900 transition">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastNotification" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden items-center gap-2.5 px-4 py-2.5 rounded-xl bg-slatepro-900 text-ivory-50 border border-gold-400 shadow-xl text-xs font-medium">
+        <i data-lucide="check-circle-2" class="w-4 h-4 text-gold-400"></i>
+        <span id="toastMessage">Cambios guardados correctamente</span>
+    </div>
+
+    <script>
+        /**
+         * BASE DE DATOS GENEALÓGICA — Familia Penado Siancas (datos reales)
+         * - 4 Abuelos (2 por parte de Jorge, 2 por parte de Natividad)
+         * - Jorge Penado Siancas & Natividad Arroyo Torres (Generación II)
+         * - 8 Hijos (Generación III)
+         * - 13 Descendientes: nietos y nueras/yernos (Generación IV)
+         */
+        const DEFAULT_FAMILY_DATA = [
+            // --- ABUELOS: lado de Jorge ---
+            { id: 'gp1', name: 'Constantino Penado', generation: 'grandparents', side: 'jorge', role: 'Padre de Jorge', dates: 'Raíz paterna', parentId: null, bio: 'Pilar de la familia Penado, su memoria vive en cada generación.' },
+            { id: 'gp2', name: 'Sandalia Siancas', generation: 'grandparents', side: 'jorge', role: 'Madre de Jorge', dates: 'Raíz paterna', parentId: null, bio: 'Madre de Jorge Penado Siancas, raíz de la familia.' },
+
+            // --- ABUELOS: lado de Natividad ---
+            { id: 'gp3', name: 'Santiago Arroyo', generation: 'grandparents', side: 'natividad', role: 'Padre de Natividad', dates: 'Raíz materna', parentId: null, bio: 'Padre de Natividad Arroyo Torres, raíz materna de la familia.' },
+            { id: 'gp4', name: 'Marcalina Torres', generation: 'grandparents', side: 'natividad', role: 'Madre de Natividad', dates: 'Raíz materna', parentId: null, bio: 'Madre de Natividad Arroyo Torres, raíz materna de la familia.' },
+
+            // --- GENERACIÓN II: Jorge y Natividad ---
+            { id: 'patriarch', name: 'Jorge Penado Siancas', generation: 'patriarch', role: 'Patriarca', dates: 'Canaria, Sucre, Víctor Fajardo, Ayacucho', parentId: null,
+              bio: 'Profesor y director de escuela, padre valiente y protector. Su historia y legado permanecen vivos en su memorial digital.' },
+            { id: 'spouse', name: 'Natividad Arroyo Torres', generation: 'spouse', role: 'Esposa de Jorge', dates: 'Esposa y compañera de vida', parentId: null,
+              bio: 'Esposa de Jorge Penado Siancas y madre de sus 8 hijos.' },
+
+            // --- GENERACIÓN III: 8 HIJOS ---
+            { id: 'c1', name: 'Edwin Penado Arroyo', generation: 'children', role: 'Hijo de Jorge y Natividad', dates: '', parentId: 'patriarch', bio: 'Hijo de Jorge Penado Siancas y Natividad Arroyo Torres.' },
+            { id: 'c2', name: 'América Penado Arroyo', generation: 'children', role: 'Hija de Jorge y Natividad', dates: '', parentId: 'patriarch', bio: 'Hija de Jorge Penado Siancas y Natividad Arroyo Torres.' },
+            { id: 'c3', name: 'Marisol Penado Arroyo', generation: 'children', role: 'Hija de Jorge y Natividad', dates: '', parentId: 'patriarch', author: true, bio: 'Hija de Jorge Penado Siancas y Natividad Arroyo Torres. Con todo su cariño, preparó este homenaje en memoria de su padre.' },
+            { id: 'c4', name: 'Florabel Penado Arroyo', generation: 'children', role: 'Hija de Jorge y Natividad', dates: '', parentId: 'patriarch', bio: 'Hija de Jorge Penado Siancas y Natividad Arroyo Torres.' },
+            { id: 'c5', name: 'Homero Penado Arroyo', generation: 'children', role: 'Hijo de Jorge y Natividad', dates: '', parentId: 'patriarch', bio: 'Hijo de Jorge Penado Siancas y Natividad Arroyo Torres.' },
+            { id: 'c6', name: 'Cleofé Penado Arroyo', generation: 'children', role: 'Hija de Jorge y Natividad', dates: '', parentId: 'patriarch', bio: 'Hija de Jorge Penado Siancas y Natividad Arroyo Torres.' },
+            { id: 'c7', name: 'Hugo Penado Arroyo', generation: 'children', role: 'Hijo de Jorge y Natividad', dates: '', parentId: 'patriarch', bio: 'Hijo de Jorge Penado Siancas y Natividad Arroyo Torres.', deceased: true },
+            { id: 'c8', name: 'Marco Penado Arroyo', generation: 'children', role: 'Hijo de Jorge y Natividad', dates: '', parentId: 'patriarch', bio: 'Hijo de Jorge Penado Siancas y Natividad Arroyo Torres.' },
+
+            // --- GENERACIÓN IV: Descendencia de Edwin (c1) ---
+            { id: 'd1', name: 'Edith Palacios', generation: 'descendant', kind: 'inlaw', role: 'Esposa de Edwin', dates: '', parentId: 'c1', bio: 'Esposa de Edwin Penado Arroyo.' },
+            { id: 'd2', name: 'Shelly Penado Palacios', generation: 'descendant', kind: 'grandchild', role: 'Nieta, hija de Edwin', dates: '', parentId: 'c1', bio: 'Nieta de Jorge y Natividad, hija de Edwin.' },
+            { id: 'd3', name: 'Marcela Penado Palacios', generation: 'descendant', kind: 'grandchild', role: 'Nieta, hija de Edwin', dates: '', parentId: 'c1', bio: 'Nieta de Jorge y Natividad, hija de Edwin.' },
+            { id: 'd4', name: 'Gracia Penado Palacios', generation: 'descendant', kind: 'grandchild', role: 'Nieta, hija de Edwin', dates: '', parentId: 'c1', bio: 'Nieta de Jorge y Natividad, hija de Edwin.' },
+            { id: 'd5', name: 'Álvaro Penado Palacios', generation: 'descendant', kind: 'grandchild', role: 'Nieto, hijo de Edwin', dates: '', parentId: 'c1', bio: 'Nieto de Jorge y Natividad, hijo de Edwin.' },
+
+            // --- Descendencia de Marisol (c3) ---
+            { id: 'd6', name: 'Ronal Zegarra Huamán', generation: 'descendant', kind: 'inlaw', role: 'Esposo de Marisol', dates: '', parentId: 'c3', bio: 'Esposo de Marisol Penado Arroyo.' },
+            { id: 'd7', name: 'Mishelle Zegarra Penado', generation: 'descendant', kind: 'grandchild', role: 'Nieta, hija de Marisol', dates: '', parentId: 'c3', bio: 'Nieta de Jorge y Natividad, hija de Marisol.' },
+            { id: 'd8', name: 'Salvador Zegarra Penado', generation: 'descendant', kind: 'grandchild', role: 'Nieto, hijo de Marisol', dates: '', parentId: 'c3', bio: 'Nieto de Jorge y Natividad, hijo de Marisol.' },
+
+            // --- Descendencia de Cleofé (c6) ---
+            { id: 'd9', name: 'Emerson Quispe', generation: 'descendant', kind: 'inlaw', role: 'Esposo de Cleofé', dates: '', parentId: 'c6', bio: 'Esposo de Cleofé Penado Arroyo.' },
+            { id: 'd10', name: 'Sofía Quispe Penado', generation: 'descendant', kind: 'grandchild', role: 'Nieta, hija de Cleofé', dates: '', parentId: 'c6', bio: 'Nieta de Jorge y Natividad, hija de Cleofé.' },
+            { id: 'd11', name: 'Briana Quispe Penado', generation: 'descendant', kind: 'grandchild', role: 'Nieta, hija de Cleofé', dates: '', parentId: 'c6', bio: 'Nieta de Jorge y Natividad, hija de Cleofé.' },
+            { id: 'd12', name: 'Alejandro Quispe Penado', generation: 'descendant', kind: 'grandchild', role: 'Nieto, hijo de Cleofé', dates: '', parentId: 'c6', bio: 'Nieto de Jorge y Natividad, hijo de Cleofé.' },
+            { id: 'd13', name: 'Benjamín Quispe Penado', generation: 'descendant', kind: 'grandchild', role: 'Nieto, hijo de Cleofé', dates: '', parentId: 'c6', bio: 'Nieto de Jorge y Natividad, hijo de Cleofé.' },
+        ];
+
+        const STORAGE_KEY = 'penado_siancas_genealogy_v2';
+        let familyData = loadFamilyData();
+        let expandedBranches = new Set(['c3', 'c6']);
+        let currentFilter = 'all';
+        let searchQuery = '';
+        let currentView = window.innerWidth < 768 ? 'directory' : 'tree';
+        let currentZoom = 1;
+        let activeMemberId = null;
+
+        function loadFamilyData() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length === DEFAULT_FAMILY_DATA.length) return parsed;
+                }
+            } catch (e) { console.warn('No se pudo leer localStorage:', e); }
+            return JSON.parse(JSON.stringify(DEFAULT_FAMILY_DATA));
+        }
+
+        function getInitials(name) {
+            const parts = name.replace(/^(Don|Doña)\s+/i, '').trim().split(/\s+/);
+            if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+            return (parts[0][0] + parts[1][0]).toUpperCase();
+        }
+
+        function matchesCriteria(member) {
+            let matchesFilter;
+            if (currentFilter === 'all') matchesFilter = true;
+            else if (currentFilter === 'couple') matchesFilter = member.generation === 'patriarch' || member.generation === 'spouse';
+            else matchesFilter = member.generation === currentFilter;
+
+            const q = searchQuery.trim().toLowerCase();
+            const matchesSearch = !q ||
+                member.name.toLowerCase().includes(q) ||
+                member.role.toLowerCase().includes(q);
+            return { matchesFilter, matchesSearch, isActive: matchesFilter && matchesSearch };
+        }
+
+        function cardMarkup(member, { big = false } = {}) {
+            const ribbon = member.deceased ? '<span class="ribbon-badge ml-1.5" title="Falleció">&#10013;</span>' : '';
+            const authorBadge = member.author
+                ? '<span class="author-badge ml-1.5" title="Preparó este homenaje">&#9829; Preparó este homenaje</span>'
+                : '';
+            return { ribbon, authorBadge };
+        }
+
+        function renderTreeView() {
+            const parentsRow = document.getElementById('parentsRow');
+            const patriarchRow = document.getElementById('patriarchRow');
+            const childrenGrid = document.getElementById('childrenGrid');
+
+            const grandparentsJorge = familyData.filter(m => m.generation === 'grandparents' && m.side === 'jorge');
+            const grandparentsNatividad = familyData.filter(m => m.generation === 'grandparents' && m.side === 'natividad');
+            const patriarch = familyData.find(m => m.generation === 'patriarch');
+            const spouse = familyData.find(m => m.generation === 'spouse');
+            const children = familyData.filter(m => m.generation === 'children');
+
+            function grandCard(p) {
+                const { isActive } = matchesCriteria(p);
+                const highlightClass = (searchQuery && isActive) ? 'highlight-match' : (!isActive ? 'dimmed-card' : '');
+                return `
+                    <div id="node-${p.id}" onclick="openMemberModal('${p.id}')"
+                         class="paper-card cursor-pointer rounded-2xl p-3.5 w-48 sm:w-56 flex items-center gap-3 relative group ${highlightClass}">
+                        <div class="w-10 h-10 rounded-xl bg-ivory-200 border border-gold-400/50 text-slatepro-800 font-serif font-bold text-base flex items-center justify-center shrink-0 group-hover:bg-gold-400 group-hover:text-slatepro-900 transition">
+                            ${getInitials(p.name)}
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-gold-700 block">${p.role}</span>
+                            <h3 class="font-serif text-base font-bold text-slatepro-900 truncate" title="${p.name}">${p.name}</h3>
+                        </div>
+                    </div>
+                `;
+            }
+
+            parentsRow.innerHTML = `
+                <div class="flex items-start gap-3 sm:gap-4">${grandparentsJorge.map(grandCard).join('')}</div>
+                <div class="flex items-start gap-3 sm:gap-4">${grandparentsNatividad.map(grandCard).join('')}</div>
+            `;
+
+            function coupleCard(m, label) {
+                const { isActive } = matchesCriteria(m);
+                const highlight = (searchQuery && isActive) ? 'highlight-match' : (!isActive ? 'dimmed-card' : '');
+                return `
+                    <div id="node-${m.id}" onclick="openMemberModal('${m.id}')"
+                         class="patriarch-card cursor-pointer rounded-2xl p-4 sm:px-6 sm:py-5 w-64 sm:w-72 text-white relative group ${highlight}">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-gold-300 via-gold-400 to-gold-600 text-slatepro-900 font-serif font-bold text-lg flex items-center justify-center shrink-0 shadow-md border border-gold-300">
+                                ${getInitials(m.name)}
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-gold-300 block">${label}</span>
+                                <h2 class="font-serif text-lg sm:text-xl font-bold text-white leading-tight">${m.name}</h2>
+                                <p class="text-[11px] text-gold-300/90 font-medium mt-0.5">${m.dates}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            patriarchRow.innerHTML = `
+                ${coupleCard(patriarch, 'Patriarca')}
+                <span class="text-gold-500 text-xl">&#9129;</span>
+                ${coupleCard(spouse, 'Esposa')}
+            `;
+
+            childrenGrid.innerHTML = children.map(child => {
+                const descendants = familyData.filter(d => d.parentId === child.id);
+                const isExpanded = expandedBranches.has(child.id);
+                const childState = matchesCriteria(child);
+                const hasMatchingDescendant = searchQuery && descendants.some(d => matchesCriteria(d).isActive);
+                const shouldShow = isExpanded || hasMatchingDescendant || currentFilter === 'descendant';
+                const childHighlight = (searchQuery && childState.isActive) ? 'highlight-match' : (!childState.isActive && !hasMatchingDescendant && currentFilter !== 'all' ? 'dimmed-card' : '');
+                const { ribbon, authorBadge } = cardMarkup(child);
+
+                return `
+                    <div class="flex flex-col items-center">
+                        <div id="node-${child.id}" class="paper-card w-full rounded-xl p-3 relative group ${childHighlight} ${child.deceased ? 'opacity-90' : ''} ${child.author ? 'ring-1 ring-gold-400' : ''}">
+                            <div onclick="openMemberModal('${child.id}')" class="cursor-pointer">
+                                <div class="flex items-center justify-between gap-1.5 mb-2">
+                                    <span class="px-2 py-0.5 rounded-md bg-slatepro-800 text-gold-300 text-[10px] font-semibold tracking-wide">${child.role.split(',')[0]}</span>
+                                </div>
+                                <div class="flex items-center gap-2.5">
+                                    <div class="w-9 h-9 rounded-lg bg-gold-400/15 border border-gold-400/40 text-slatepro-900 font-serif font-bold text-sm flex items-center justify-center shrink-0 group-hover:bg-gold-400 transition">
+                                        ${getInitials(child.name)}
+                                    </div>
+                                    <h3 class="font-serif text-sm font-bold text-slatepro-900 leading-snug line-clamp-2" title="${child.name}">
+                                        ${child.name}${ribbon}
+                                    </h3>
+                                </div>
+                                ${authorBadge ? `<div class="mt-1.5">${authorBadge}</div>` : ''}
+                            </div>
+
+                            ${descendants.length > 0 ? `
+                                <button onclick="toggleBranch('${child.id}', event)"
+                                        class="mt-2.5 w-full py-1 px-2 rounded-lg bg-ivory-200/70 hover:bg-gold-400/25 border border-gold-400/30 text-[11px] font-semibold text-slatepro-800 flex items-center justify-between transition">
+                                    <span>${descendants.length} familiar${descendants.length === 1 ? '' : 'es'}</span>
+                                    <i data-lucide="${shouldShow ? 'chevron-up' : 'chevron-down'}" class="w-3.5 h-3.5 text-gold-700"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+
+                        ${shouldShow && descendants.length > 0 ? `
+                            <div class="w-full pl-3 mt-2.5 space-y-2 relative border-l-2 border-gold-400/50 ml-3 animate-branch">
+                                ${descendants.map(d => {
+                                    const dState = matchesCriteria(d);
+                                    const dHighlight = (searchQuery && dState.isActive) ? 'highlight-match' : (!dState.isActive ? 'dimmed-card' : '');
+                                    return `
+                                        <div id="node-${d.id}" onclick="openMemberModal('${d.id}')"
+                                             class="paper-card cursor-pointer rounded-lg p-2.5 relative group hover:bg-white ${dHighlight}">
+                                            <span class="absolute -left-3 top-1/2 w-3 h-0.5 bg-gold-400/60"></span>
+                                            <div class="flex items-center gap-2">
+                                                <div class="w-7 h-7 rounded-md bg-ivory-200 text-slatepro-800 font-serif font-bold text-xs flex items-center justify-center shrink-0 group-hover:bg-slatepro-800 group-hover:text-gold-300 transition">
+                                                    ${getInitials(d.name)}
+                                                </div>
+                                                <div class="min-w-0 flex-1">
+                                                    <h4 class="font-sans text-xs font-semibold text-slatepro-900 truncate" title="${d.name}">${d.name}</h4>
+                                                    <span class="text-[10px] text-slatepro-700/70 block">${d.role}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+            requestAnimationFrame(drawSvgConnectors);
+        }
+
+        function drawSvgConnectors() {
+            const svg = document.getElementById('treeSvgLines');
+            const canvas = document.getElementById('treeCanvas');
+            if (!svg || !canvas || currentView !== 'tree') return;
+
+            const canvasRect = canvas.getBoundingClientRect();
+            const scale = currentZoom;
+            svg.innerHTML = '';
+
+            function getCenter(el, anchor = 'center') {
+                if (!el) return null;
+                const r = el.getBoundingClientRect();
+                const x = (r.left - canvasRect.left + r.width / 2) / scale;
+                let y = (r.top - canvasRect.top + r.height / 2) / scale;
+                if (anchor === 'top') y = (r.top - canvasRect.top) / scale;
+                if (anchor === 'bottom') y = (r.bottom - canvasRect.top) / scale;
+                return { x, y };
+            }
+
+            function createPath(d, strokeWidth = 1.8, opacity = 0.75) {
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', d);
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke', '#B89028');
+                path.setAttribute('stroke-width', strokeWidth);
+                path.setAttribute('stroke-opacity', opacity);
+                path.setAttribute('stroke-linecap', 'round');
+                svg.appendChild(path);
+            }
+
+            function connectCouple(idA, idB, targetTop) {
+                const a = getCenter(document.getElementById(`node-${idA}`), 'bottom');
+                const b = getCenter(document.getElementById(`node-${idB}`), 'bottom');
+                if (!a || !b || !targetTop) return;
+                const midX = (a.x + b.x) / 2;
+                const unionY = a.y + 18;
+                createPath(`M ${a.x} ${a.y} L ${a.x} ${unionY} L ${b.x} ${unionY} L ${b.x} ${b.y}`, 2, 0.8);
+                createPath(`M ${midX} ${unionY} L ${targetTop.x} ${targetTop.y}`, 2.2, 0.9);
+            }
+
+            const jorgeTop = getCenter(document.getElementById('node-patriarch'), 'top');
+            const natividadTop = getCenter(document.getElementById('node-spouse'), 'top');
+            connectCouple('gp1', 'gp2', jorgeTop);
+            connectCouple('gp3', 'gp4', natividadTop);
+
+            const jorgeBottom = getCenter(document.getElementById('node-patriarch'), 'bottom');
+            const natividadBottom = getCenter(document.getElementById('node-spouse'), 'bottom');
+            const children = familyData.filter(m => m.generation === 'children');
+            const childTops = children.map(c => getCenter(document.getElementById(`node-${c.id}`), 'top')).filter(Boolean);
+
+            if (jorgeBottom && natividadBottom && childTops.length > 0) {
+                const coupleMidX = (jorgeBottom.x + natividadBottom.x) / 2;
+                const coupleY = Math.max(jorgeBottom.y, natividadBottom.y);
+                const busY = coupleY + 30;
+                const firstX = childTops[0].x;
+                const lastX = childTops[childTops.length - 1].x;
+
+                createPath(`M ${coupleMidX} ${coupleY} L ${coupleMidX} ${busY}`, 2.2, 0.9);
+                createPath(`M ${firstX} ${busY} L ${lastX} ${busY}`, 2, 0.75);
+                childTops.forEach(pt => createPath(`M ${pt.x} ${busY} L ${pt.x} ${pt.y}`, 1.8, 0.75));
+            }
+        }
+
+        function renderDirectoryView() {
+            const container = document.getElementById('directoryViewContainer');
+            const grandparentsJorge = familyData.filter(m => m.generation === 'grandparents' && m.side === 'jorge');
+            const grandparentsNatividad = familyData.filter(m => m.generation === 'grandparents' && m.side === 'natividad');
+            const patriarch = familyData.find(m => m.generation === 'patriarch');
+            const spouse = familyData.find(m => m.generation === 'spouse');
+            const children = familyData.filter(m => m.generation === 'children');
+
+            let html = '';
+
+            const visibleGrandparents = [...grandparentsJorge, ...grandparentsNatividad].filter(p => matchesCriteria(p).isActive);
+            if (visibleGrandparents.length > 0) {
+                html += `
+                    <div class="space-y-3">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gold-700 flex items-center gap-2">
+                            <span class="w-6 h-px bg-gold-400"></span><span>Generación I • Abuelos (4)</span>
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${visibleGrandparents.map(p => `
+                                <div onclick="openMemberModal('${p.id}')" class="paper-card cursor-pointer rounded-2xl p-4 flex items-center gap-3.5">
+                                    <div class="w-12 h-12 rounded-xl bg-ivory-200 border border-gold-400/50 text-slatepro-800 font-serif font-bold text-lg flex items-center justify-center shrink-0">${getInitials(p.name)}</div>
+                                    <div>
+                                        <span class="text-[10px] font-bold uppercase tracking-wider text-gold-700">${p.role}</span>
+                                        <h4 class="font-serif text-xl font-bold text-slatepro-900">${p.name}</h4>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            const coupleVisible = [patriarch, spouse].filter(m => matchesCriteria(m).isActive);
+            if (coupleVisible.length > 0) {
+                html += `
+                    <div class="space-y-3">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gold-700 flex items-center gap-2">
+                            <span class="w-6 h-px bg-gold-400"></span><span>Generación II • Jorge y Natividad</span>
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${coupleVisible.map(m => `
+                                <div onclick="openMemberModal('${m.id}')" class="patriarch-card cursor-pointer rounded-2xl p-5 text-white">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-300 to-gold-500 text-slatepro-900 font-serif font-bold text-xl flex items-center justify-center shrink-0">${getInitials(m.name)}</div>
+                                        <div>
+                                            <span class="text-[10px] font-bold uppercase tracking-widest text-gold-300">${m.role}</span>
+                                            <h4 class="font-serif text-2xl font-bold text-white">${m.name}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            const branchCards = children.map(child => {
+                const descendants = familyData.filter(d => d.parentId === child.id);
+                const childMatch = matchesCriteria(child).isActive;
+                const matchingDescendants = descendants.filter(d => matchesCriteria(d).isActive);
+
+                if (!childMatch && matchingDescendants.length === 0) return '';
+
+                const isOpen = expandedBranches.has(child.id) || searchQuery.length > 0 || currentFilter === 'descendant';
+                const listToRender = (searchQuery || currentFilter === 'descendant') ? matchingDescendants : descendants;
+                const { ribbon, authorBadge } = cardMarkup(child);
+
+                return `
+                    <div class="paper-card rounded-2xl overflow-hidden ${child.author ? 'ring-1 ring-gold-400' : ''}">
+                        <div class="p-4 flex items-center justify-between gap-3 bg-white/60">
+                            <div onclick="openMemberModal('${child.id}')" class="flex items-center gap-3.5 cursor-pointer flex-1 min-w-0">
+                                <div class="w-11 h-11 rounded-xl bg-slatepro-800 text-gold-300 font-serif font-bold text-base flex items-center justify-center shrink-0">${getInitials(child.name)}</div>
+                                <div class="min-w-0">
+                                    <span class="text-[10px] font-bold uppercase tracking-wider text-gold-700">${child.role}</span>
+                                    <h4 class="font-serif text-xl font-bold text-slatepro-900 truncate">${child.name}${ribbon}</h4>
+                                    ${authorBadge ? `<div class="mt-1">${authorBadge}</div>` : ''}
+                                </div>
+                            </div>
+                            ${descendants.length > 0 ? `
+                                <button onclick="toggleBranch('${child.id}', event)"
+                                        class="px-3 py-1.5 rounded-xl bg-ivory-200/80 hover:bg-gold-400/25 border border-gold-400/40 text-xs font-semibold text-slatepro-800 flex items-center gap-1.5 shrink-0 transition">
+                                    <span>${descendants.length} familiar${descendants.length === 1 ? '' : 'es'}</span>
+                                    <i data-lucide="${isOpen ? 'chevron-up' : 'chevron-down'}" class="w-4 h-4 text-gold-700"></i>
+                                </button>
+                            ` : ''}
+                        </div>
+
+                        ${isOpen && listToRender.length > 0 ? `
+                            <div class="px-4 pb-4 pt-2 bg-ivory-100/70 border-t border-gold-400/20 grid grid-cols-1 sm:grid-cols-2 gap-2.5 animate-branch">
+                                ${listToRender.map(d => `
+                                    <div onclick="openMemberModal('${d.id}')"
+                                         class="bg-white hover:bg-ivory-50 cursor-pointer rounded-xl p-3 border border-gold-400/30 flex items-center gap-3 transition shadow-sm">
+                                        <div class="w-8 h-8 rounded-lg bg-gold-400/15 text-slatepro-900 font-serif font-bold text-xs flex items-center justify-center shrink-0">${getInitials(d.name)}</div>
+                                        <div class="min-w-0">
+                                            <h5 class="text-xs font-bold text-slatepro-900 truncate">${d.name}</h5>
+                                            <span class="text-[11px] text-slatepro-700/75">${d.role}</span>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).filter(Boolean);
+
+            if (branchCards.length > 0) {
+                html += `
+                    <div class="space-y-3">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gold-700 flex items-center gap-2">
+                            <span class="w-6 h-px bg-gold-400"></span><span>Generación III &amp; IV • 8 Hijos y su descendencia</span>
+                        </h3>
+                        <div class="space-y-3">${branchCards.join('')}</div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+            lucide.createIcons();
+        }
+
+        function renderApp() {
+            const treeContainer = document.getElementById('treeViewContainer');
+            const dirContainer = document.getElementById('directoryViewContainer');
+            const emptyState = document.getElementById('emptySearchState');
+
+            const anyMatch = familyData.some(m => matchesCriteria(m).isActive);
+
+            if (!anyMatch) {
+                treeContainer.classList.add('hidden');
+                dirContainer.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+            emptyState.classList.add('hidden');
+
+            if (currentView === 'tree') {
+                treeContainer.classList.remove('hidden');
+                dirContainer.classList.add('hidden');
+                renderTreeView();
+            } else {
+                treeContainer.classList.add('hidden');
+                dirContainer.classList.remove('hidden');
+                renderDirectoryView();
+            }
+
+            const toggleText = document.getElementById('toggleAllText');
+            toggleText.textContent = expandedBranches.size > 0 ? 'Colapsar ramas' : 'Expandir ramas';
+        }
+
+        window.toggleBranch = function (childId, event) {
+            if (event) event.stopPropagation();
+            if (expandedBranches.has(childId)) expandedBranches.delete(childId);
+            else expandedBranches.add(childId);
+            renderApp();
+        };
+
+        window.openMemberModal = function (memberId) {
+            const member = familyData.find(m => m.id === memberId);
+            if (!member) return;
+            activeMemberId = memberId;
+
+            const modal = document.getElementById('memberModal');
+            document.getElementById('modalAvatar').textContent = getInitials(member.name);
+            document.getElementById('modalBadge').textContent = member.role;
+            document.getElementById('modalName').textContent = member.name;
+            document.getElementById('modalDates').innerHTML = `<i data-lucide="map-pin" class="w-3.5 h-3.5 text-gold-400"></i><span>${member.dates || 'Familia Penado Siancas'}</span>`;
+            document.getElementById('modalBio').textContent = `"${member.bio}"`;
+
+            const connectionsList = document.getElementById('modalConnectionsList');
+            connectionsList.innerHTML = '';
+            let relationText = '';
+
+            if (member.generation === 'grandparents') {
+                const targetId = member.side === 'jorge' ? 'patriarch' : 'spouse';
+                const target = familyData.find(m => m.id === targetId);
+                relationText = member.side === 'jorge' ? `Progenitor(a) de Jorge Penado Siancas` : `Progenitor(a) de Natividad Arroyo Torres`;
+                connectionsList.innerHTML = `<button onclick="openMemberModal('${targetId}')" class="px-3 py-1.5 rounded-lg bg-slatepro-800 text-gold-300 text-xs font-medium hover:bg-slatepro-900 transition">${target.name}</button>`;
+            } else if (member.generation === 'patriarch') {
+                const gp1 = familyData.find(m => m.id === 'gp1');
+                const gp2 = familyData.find(m => m.id === 'gp2');
+                const spouse = familyData.find(m => m.id === 'spouse');
+                relationText = `Hijo de ${gp1.name} y ${gp2.name} · Esposo de ${spouse.name} · Padre de 8 hijos y abuelo de 10 nietos`;
+                connectionsList.innerHTML = `
+                    <button onclick="openMemberModal('gp1')" class="px-2.5 py-1 rounded-lg bg-ivory-200 text-slatepro-900 text-xs font-medium hover:bg-gold-400/30 transition">Padre: ${gp1.name}</button>
+                    <button onclick="openMemberModal('gp2')" class="px-2.5 py-1 rounded-lg bg-ivory-200 text-slatepro-900 text-xs font-medium hover:bg-gold-400/30 transition">Madre: ${gp2.name}</button>
+                    <button onclick="openMemberModal('spouse')" class="px-2.5 py-1 rounded-lg bg-slatepro-800 text-gold-300 text-xs font-medium">Esposa: ${spouse.name}</button>
+                `;
+            } else if (member.generation === 'spouse') {
+                const gp3 = familyData.find(m => m.id === 'gp3');
+                const gp4 = familyData.find(m => m.id === 'gp4');
+                const patriarch = familyData.find(m => m.id === 'patriarch');
+                relationText = `Hija de ${gp3.name} y ${gp4.name} · Esposa de ${patriarch.name}`;
+                connectionsList.innerHTML = `
+                    <button onclick="openMemberModal('gp3')" class="px-2.5 py-1 rounded-lg bg-ivory-200 text-slatepro-900 text-xs font-medium hover:bg-gold-400/30 transition">Padre: ${gp3.name}</button>
+                    <button onclick="openMemberModal('gp4')" class="px-2.5 py-1 rounded-lg bg-ivory-200 text-slatepro-900 text-xs font-medium hover:bg-gold-400/30 transition">Madre: ${gp4.name}</button>
+                    <button onclick="openMemberModal('patriarch')" class="px-2.5 py-1 rounded-lg bg-slatepro-800 text-gold-300 text-xs font-medium">Esposo: ${patriarch.name}</button>
+                `;
+            } else if (member.generation === 'children') {
+                const patriarch = familyData.find(m => m.id === 'patriarch');
+                const spouse = familyData.find(m => m.id === 'spouse');
+                const kids = familyData.filter(d => d.parentId === member.id);
+                relationText = `${member.role} · Natividad Arroyo Torres` + (kids.length ? ` · ${kids.length} familiar${kids.length === 1 ? '' : 'es'} directos` : ' · Sin descendencia registrada') + (member.deceased ? ' · Falleció' : '');
+                connectionsList.innerHTML = `
+                    <button onclick="openMemberModal('patriarch')" class="px-2.5 py-1 rounded-lg bg-slatepro-800 text-gold-300 text-xs font-medium">Padre: ${patriarch.name}</button>
+                    <button onclick="openMemberModal('spouse')" class="px-2.5 py-1 rounded-lg bg-slatepro-800 text-gold-300 text-xs font-medium">Madre: ${spouse.name}</button>
+                    ${kids.map(k => `<button onclick="openMemberModal('${k.id}')" class="px-2.5 py-1 rounded-lg bg-ivory-200 text-slatepro-900 text-xs font-medium hover:bg-gold-400/30 transition">${k.name}</button>`).join('')}
+                `;
+            } else if (member.generation === 'descendant') {
+                const parent = familyData.find(c => c.id === member.parentId);
+                relationText = member.kind === 'inlaw'
+                    ? `${member.role} · Familia política de Jorge y Natividad`
+                    : `${member.role} · Nieto/a de Jorge Penado Siancas y Natividad Arroyo Torres`;
+                connectionsList.innerHTML = `
+                    ${parent ? `<button onclick="openMemberModal('${parent.id}')" class="px-2.5 py-1 rounded-lg bg-ivory-200 text-slatepro-900 text-xs font-medium hover:bg-gold-400/30 transition">${parent.name}</button>` : ''}
+                    <button onclick="openMemberModal('patriarch')" class="px-2.5 py-1 rounded-lg bg-slatepro-800 text-gold-300 text-xs font-medium">Jorge Penado Siancas</button>
+                `;
+            }
+
+            document.getElementById('modalRelation').textContent = relationText;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            lucide.createIcons();
+        };
+
+        function closeModal() {
+            const modal = document.getElementById('memberModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            activeMemberId = null;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateViewButtons();
+            renderApp();
+
+            window.addEventListener('resize', () => { if (currentView === 'tree') drawSvgConnectors(); });
+
+            const searchInput = document.getElementById('searchInput');
+            const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                clearSearchBtn.classList.toggle('hidden', !searchQuery);
+                renderApp();
+            });
+
+            clearSearchBtn.addEventListener('click', () => {
+                searchQuery = '';
+                searchInput.value = '';
+                clearSearchBtn.classList.add('hidden');
+                renderApp();
+            });
+
+            document.getElementById('resetSearchEmptyBtn').addEventListener('click', () => {
+                searchQuery = '';
+                searchInput.value = '';
+                clearSearchBtn.classList.add('hidden');
+                currentFilter = 'all';
+                updateFilterButtons();
+                renderApp();
+            });
+
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentFilter = btn.dataset.filter;
+                    updateFilterButtons();
+                    renderApp();
+                });
+            });
+
+            function updateFilterButtons() {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    if (b.dataset.filter === currentFilter) {
+                        b.className = 'filter-btn active px-3 py-1.5 rounded-lg text-xs font-semibold bg-slatepro-800 text-gold-300 border border-slatepro-800 whitespace-nowrap transition';
+                    } else {
+                        b.className = 'filter-btn px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-slatepro-800 border border-gold-400/30 hover:border-gold-500 whitespace-nowrap transition';
+                    }
+                });
+            }
+
+            document.getElementById('viewTreeBtn').addEventListener('click', () => { currentView = 'tree'; updateViewButtons(); renderApp(); });
+            document.getElementById('viewDirectoryBtn').addEventListener('click', () => { currentView = 'directory'; updateViewButtons(); renderApp(); });
+
+            function updateViewButtons() {
+                const treeBtn = document.getElementById('viewTreeBtn');
+                const dirBtn = document.getElementById('viewDirectoryBtn');
+                if (currentView === 'tree') {
+                    treeBtn.className = 'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-white text-slatepro-900 shadow-sm transition';
+                    dirBtn.className = 'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slatepro-700 hover:text-slatepro-900 transition';
+                } else {
+                    dirBtn.className = 'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold bg-white text-slatepro-900 shadow-sm transition';
+                    treeBtn.className = 'flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium text-slatepro-700 hover:text-slatepro-900 transition';
+                }
+            }
+
+            document.getElementById('toggleAllBranchesBtn').addEventListener('click', () => {
+                if (expandedBranches.size > 0) expandedBranches.clear();
+                else familyData.filter(m => m.generation === 'children').forEach(c => expandedBranches.add(c.id));
+                renderApp();
+            });
+
+            const treeCanvas = document.getElementById('treeCanvas');
+            const zoomText = document.getElementById('zoomLevelText');
+
+            function applyZoom(newZoom) {
+                currentZoom = Math.min(1.2, Math.max(0.65, newZoom));
+                treeCanvas.style.transform = `scale(${currentZoom})`;
+                zoomText.textContent = `${Math.round(currentZoom * 100)}%`;
+                setTimeout(drawSvgConnectors, 220);
+            }
+
+            document.getElementById('zoomInBtn').addEventListener('click', () => applyZoom(currentZoom + 0.1));
+            document.getElementById('zoomOutBtn').addEventListener('click', () => applyZoom(currentZoom - 0.1));
+            document.getElementById('zoomResetBtn').addEventListener('click', () => applyZoom(1));
+
+            document.getElementById('closeModalBtn').addEventListener('click', closeModal);
+            document.getElementById('closeModalFooterBtn').addEventListener('click', closeModal);
+            document.getElementById('memberModal').addEventListener('click', (e) => { if (e.target.id === 'memberModal') closeModal(); });
+        });
+    </script>
+</body>
+</html>
