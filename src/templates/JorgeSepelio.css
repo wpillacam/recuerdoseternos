@@ -18,8 +18,31 @@
 
 .jsp__video {
   width: 100%;
-  max-height: 70vh;
+  max-height: 80vh;
+  object-fit: contain;
   border-radius: var(--radius-md);
   background: #000;
   display: block;
+}
+
+.jsp__switch {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.jsp__switch-btn {
+  padding: 8px 22px;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: var(--color-white);
+  color: var(--color-text-soft);
+  font: inherit;
+  cursor: pointer;
+}
+
+.jsp__switch-btn--active {
+  background: var(--color-oxford);
+  border-color: var(--color-oxford);
+  color: var(--tpl-accent, #c6a664);
 }

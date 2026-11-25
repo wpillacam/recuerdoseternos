@@ -81,5 +81,10 @@ export function useYoutubeAudio(songUrl, songTitle) {
     player.loadVideoById(songs[index].id);
   };
 
-  return { containerRef, playing, currentIndex, songs, playSong };
+  // Para que la musica no se superponga con un video que el visitante reproduce.
+  const pauseMusic = () => {
+    if (readyRef.current) playerRef.current?.pauseVideo();
+  };
+
+  return { containerRef, playing, currentIndex, songs, playSong, pauseMusic };
 }

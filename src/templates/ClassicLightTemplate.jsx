@@ -43,6 +43,7 @@ export default function ClassicLightTemplate({
     currentIndex: audioIndex,
     songs,
     playSong,
+    pauseMusic,
   } = useYoutubeAudio(memorial.song_url, memorial.song_title);
 
   const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url).filter(
@@ -148,6 +149,7 @@ export default function ClassicLightTemplate({
                 poster="https://zqdfxiuqkuoblzozgqrk.supabase.co/storage/v1/object/public/memorial-media/jorge-penado-siancas/invitacion_misa.jpg"
                 controls
                 playsInline
+                onPlay={pauseMusic}
                 style={{ width: "100%", height: "100%", objectFit: "contain", background: "#000" }}
               />
             </div>
@@ -185,7 +187,7 @@ export default function ClassicLightTemplate({
           <p className="mem-empty">{mp.noFamily}</p>
         );
       case "sepelio":
-        return <JorgeSepelio />;
+        return <JorgeSepelio onVideoPlay={pauseMusic} />;
       case "condolencias":
         return (
           <div className="mem-condolences">

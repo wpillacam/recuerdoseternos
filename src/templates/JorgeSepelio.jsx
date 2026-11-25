@@ -10,9 +10,10 @@ const FOLDER = "jorge-penado-siancas/sepelio";
 const VIDEO_EXT = /\.(mp4|mov|webm|m4v)$/i;
 const IMAGE_EXT = /\.(jpe?g|png|webp|gif)$/i;
 
-export default function JorgeSepelio() {
+export default function JorgeSepelio({ onVideoPlay }) {
   const [media, setMedia] = useState(null);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [view, setView] = useState("fotos");
 
   useEffect(() => {
     let active = true;
@@ -36,6 +37,8 @@ export default function JorgeSepelio() {
   if (!media) return null;
 
   const { videos, photos } = media;
+  const showSwitch = videos.length > 0 && photos.length > 0;
+  const current = showSwitch ? view : photos.length ? "fotos" : "video";
 
   if (!videos.length && !photos.length) {
     return <p className="mem-empty">Pronto compartiremos aquí las fotos y videos de su despedida.</p>;
@@ -47,15 +50,33 @@ export default function JorgeSepelio() {
         El último adiós a Jorge, acompañado del cariño de su familia, amigos y de todos los que lo quisieron.
       </p>
 
-      {videos.length > 0 && (
-        <div className="jsp__videos">
-          {videos.map((video) => (
-            <video key={video.id} className="jsp__video" src={video.url} controls playsInline preload="metadata" />
+      {showSwitch && (
+        <div className="jsp__switch">
+          {[
+            ["fotos", "Fotos"],
+            ["video", videos.length > 1 ? "Videos" : "Video"],
+          ].map(([id, label]) => (
+            <button
+              key={id}
+              type="button"
+              className={`jsp__switch-btn ${current === id ? "jsp__switch-btn--active" : ""}`}
+              onClick={() => setView(id)}
+            >
+              {label}
+            </button>
           ))}
         </div>
       )}
 
-      {photos.length > 0 && (
+      {current === "video" && (
+        <div className="jsp__videos">
+          {videos.map((video) => (
+            <video key={video.id} className="jsp__video" src={video.url} controls playsInline preload="metadata" onPlay={onVideoPlay} />
+          ))}
+        </div>
+      )}
+
+      {current === "fotos" && (
         <div className="mem-grid">
           {photos.map((photo, i) => (
             <button type="button" className="mem-grid__item" key={photo.id} onClick={() => setLightboxIndex(i)}>
