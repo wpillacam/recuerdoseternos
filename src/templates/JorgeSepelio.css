@@ -1,0 +1,25 @@
+.jsp {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.jsp__intro {
+  text-align: center;
+  font-style: italic;
+  color: var(--color-text-soft);
+}
+
+.jsp__videos {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.jsp__video {
+  width: 100%;
+  max-height: 70vh;
+  border-radius: var(--radius-md);
+  background: #000;
+  display: block;
+}

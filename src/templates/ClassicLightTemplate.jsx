@@ -6,6 +6,7 @@ import { useYoutubeAudio } from "./useYoutubeAudio";
 import PhotoLightbox from "./PhotoLightbox";
 import JorgeFamilyTree from "./JorgeFamilyTree";
 import JorgeGallery from "./JorgeGallery";
+import JorgeSepelio from "./JorgeSepelio";
 import "./ClassicLightTemplate.css";
 
 const BASE_TABS = ["bio", "timeline", "vela", "album", "video", "arbol", "condolencias"];
@@ -47,6 +48,9 @@ export default function ClassicLightTemplate({
   const tabs = BASE_TABS.filter((id) => id !== "video" || memorial.video_url).filter(
     (id) => id !== "timeline" || events.length > 0
   );
+  if (memorial.id === CUSTOM_TREE_MEMORIAL_ID) {
+    tabs.splice(tabs.indexOf("arbol") + 1, 0, "sepelio");
+  }
   const dateRange = [formatDate(memorial.birth_date), formatDate(memorial.death_date)]
     .filter(Boolean)
     .join(" — ");
@@ -180,6 +184,8 @@ export default function ClassicLightTemplate({
         ) : (
           <p className="mem-empty">{mp.noFamily}</p>
         );
+      case "sepelio":
+        return <JorgeSepelio />;
       case "condolencias":
         return (
           <div className="mem-condolences">
